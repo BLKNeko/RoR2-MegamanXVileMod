@@ -1,0 +1,76 @@
+ManifestFileVersion: 0
+CRC: 1184285600
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 8cb73909a6b91fbe2e3db9f97971bf24
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 37d7ae37fbed6ed5b9d3b1c92b3cf570
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67079b849227b734694872d8810229b8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: aaabc320440a02340b0239f0cf1745a2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 24f98ceb39626e542bce4568de94b61d, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 319
+  Script: {instanceID: 0}
+Assets:
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/ExampleSurvivorBody.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill4Icon.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/Run.dae
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlVile.prefab
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/PassiveIcon.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Materials/matVile.mat
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/ExampleSurvivorMesh.mesh
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Materials/matExampleSurvivor.mat
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill2Icon.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/OLDanimExampleSurvivor.controller
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/Model.dae
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill3Icon.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill1Icon.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/ExampleSurvivorGestureMask.mask
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MMX Idle Pose.fbx
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/ch_010_000_Vile.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/texExampleSurvivor.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/IdleeXcella.anim
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlExampleSurvivor.prefab
+Dependencies: []

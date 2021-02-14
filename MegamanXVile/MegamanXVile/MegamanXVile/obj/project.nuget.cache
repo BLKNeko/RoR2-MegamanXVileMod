@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "bZ+kjea6AO62DgH33/jQag0QW5q2/RXLdUc4dQK3jXyUJDxBreDG/Hz+hBBpnDgzlcxtpc3S2p9dWDKKNrrTXw==",
+  "success": true,
+  "projectFilePath": "C:\\JOGOS\\Tools\\ROR2 ModdingTools\\MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.csproj",
+  "expectedPackageFiles": [
+    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
