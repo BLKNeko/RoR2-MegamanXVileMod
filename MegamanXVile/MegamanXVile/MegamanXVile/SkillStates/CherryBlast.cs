@@ -6,7 +6,8 @@ using RoR2;
 using UnityEngine;
 using RoR2.Projectile;
 using UnityEngine.Networking;
-
+using EntityStates.ExampleSurvivorStates;
+using System.Reflection;
 
 namespace MegamanXVile.SkillStates
 {
@@ -18,6 +19,8 @@ namespace MegamanXVile.SkillStates
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerClayBruiserMinigun");
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/Hitspark1");
         public int bulletcount;
+        PassiveState VP = new PassiveState();
+        public bool heat => VP.isHeated;
 
         public float shootdelay = 1.5f;
         public float timer = 2f;
@@ -39,7 +42,12 @@ namespace MegamanXVile.SkillStates
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
             this.muzzleString = "Weapon";
-            shootdelay -= (base.attackSpeedStat / 10);
+
+            
+            if (heat)
+                shootdelay = 0.06f;
+            else
+                shootdelay -= (base.attackSpeedStat / 10);
 
 
             base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);

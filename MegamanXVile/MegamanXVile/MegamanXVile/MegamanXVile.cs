@@ -15,6 +15,8 @@ using System.Security;
 using System.Security.Permissions;
 using MegamanXVile.SkillStates;
 using MegamanXVile.Materials;
+using EntityStates.ExampleSurvivorStates;
+
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -325,6 +327,13 @@ namespace MegamanXVileSurvivor
             aimAnimator.pitchGiveupRange = 30f;
             aimAnimator.yawGiveupRange = 10f;
             aimAnimator.giveupDuration = 8f;
+
+
+            //trying to add a passive
+            LoadoutAPI.AddSkill(typeof(PassiveState));
+            EntityStateMachine stateMachine = bodyComponent.GetComponent<EntityStateMachine>();
+            stateMachine.mainStateType = new SerializableEntityStateType(typeof(PassiveState));
+
         }
 
         private void RegisterCharacter()
@@ -379,6 +388,7 @@ namespace MegamanXVileSurvivor
 
             PassiveSetup();
             PrimarySetup();
+            SecondarySetup();
             UtilitySetup();
         }
 
@@ -407,8 +417,8 @@ namespace MegamanXVileSurvivor
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
 
-            LanguageAPI.Add("EXAMPLESURVIVOR_PRIMARY_CROSSBOW_NAME", "Crossbow");
-            LanguageAPI.Add("EXAMPLESURVIVOR_PRIMARY_CROSSBOW_DESCRIPTION", "Fire an arrow, dealing <style=cIsDamage>200% damage</style>.");
+            LanguageAPI.Add("VILE_PRIMARY_NAME", "CherryBlast");
+            LanguageAPI.Add("VILE_PRIMARY_DESCRIPTION", "Vile's gatling can fire super fast bullets after completely heated, dealing <style=cIsDamage>25% damage</style>.");
 
             // set up your primary skill def here!
 
@@ -430,9 +440,9 @@ namespace MegamanXVileSurvivor
             mySkillDef.shootDelay = 0f;
             mySkillDef.stockToConsume = 1;
             mySkillDef.icon = Assets.icon1;
-            mySkillDef.skillDescriptionToken = "EXAMPLESURVIVOR_PRIMARY_CROSSBOW_DESCRIPTION";
-            mySkillDef.skillName = "EXAMPLESURVIVOR_PRIMARY_CROSSBOW_NAME";
-            mySkillDef.skillNameToken = "EXAMPLESURVIVOR_PRIMARY_CROSSBOW_NAME";
+            mySkillDef.skillDescriptionToken = "VILE_PRIMARY_DESCRIPTION";
+            mySkillDef.skillName = "VILE_PRIMARY_NAME";
+            mySkillDef.skillNameToken = "VILE_PRIMARY_NAME";
 
             LoadoutAPI.AddSkillDef(mySkillDef);
 
@@ -462,12 +472,71 @@ namespace MegamanXVileSurvivor
             };*/
         }
 
+        void SecondarySetup()
+        {
+            SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
+
+            LanguageAPI.Add("VILE_SECONDARY_NAME", "BOMBTEST");
+            LanguageAPI.Add("VILE_SECONDARY_DESCRIPTION", "Vile's gatling can fire super fast bullets after completely heated, dealing <style=cIsDamage>25% damage</style>.");
+
+            // set up your primary skill def here!
+
+            SkillDef mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(ExplosiveBomb));
+            mySkillDef.activationStateMachineName = "Weapon";
+            mySkillDef.baseMaxStock = 1;
+            mySkillDef.baseRechargeInterval = 0f;
+            mySkillDef.beginSkillCooldownOnSkillEnd = false;
+            mySkillDef.canceledFromSprinting = false;
+            mySkillDef.fullRestockOnAssign = true;
+            mySkillDef.interruptPriority = InterruptPriority.Any;
+            mySkillDef.isBullets = false;
+            mySkillDef.isCombatSkill = true;
+            mySkillDef.mustKeyPress = false;
+            mySkillDef.noSprint = true;
+            mySkillDef.rechargeStock = 1;
+            mySkillDef.requiredStock = 1;
+            mySkillDef.shootDelay = 0f;
+            mySkillDef.stockToConsume = 1;
+            mySkillDef.icon = Assets.icon2;
+            mySkillDef.skillDescriptionToken = "VILE_SECONDARY_DESCRIPTION";
+            mySkillDef.skillName = "VILE_SECONDARY_NAME";
+            mySkillDef.skillNameToken = "VILE_SECONDARY_NAME";
+
+            LoadoutAPI.AddSkillDef(mySkillDef);
+
+            component.secondary = characterPrefab.AddComponent<GenericSkill>();
+            SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            newFamily.variants = new SkillFamily.Variant[1];
+            LoadoutAPI.AddSkillFamily(newFamily);
+            component.secondary.SetFieldValue("_skillFamily", newFamily);
+            SkillFamily skillFamily = component.secondary.skillFamily;
+
+            skillFamily.variants[0] = new SkillFamily.Variant
+            {
+                skillDef = mySkillDef,
+                unlockableName = "",
+                viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
+            };
+
+
+            // add this code after defining a new skilldef if you're adding an alternate skill
+
+            /*Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+            {
+                skillDef = newSkillDef,
+                unlockableName = "",
+                viewableNode = new ViewablesCatalog.Node(newSkillDef.skillNameToken, false, null)
+            };*/
+        }
+
         void UtilitySetup()
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
 
             LanguageAPI.Add("VILE_UTILITY_NAME", "EletricSpark");
-            LanguageAPI.Add("VILE_UTILITY_DESCRIPTION", "Fire an arrow, dealing <style=cIsDamage>200% damage</style>.");
+            LanguageAPI.Add("VILE_UTILITY_DESCRIPTION", "Fire an eletric bomb, dealing <style=cIsDamage>1000% damage</style> and paralize enemies for 5s.");
 
             // set up your primary skill def here!
 
@@ -526,7 +595,7 @@ namespace MegamanXVileSurvivor
             // set up the doppelganger for artifact of vengeance here
             // quite simple, gets a bit more complex if you're adding your own ai, but commando ai will do
 
-            doppelganger = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterMasters/CommandoMonsterMaster"), "ExampleSurvivorMonsterMaster", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "CreateDoppelganger", 159);
+            doppelganger = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterMasters/CommandoMonsterMaster"), "VileMonsterMaster", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "CreateDoppelganger", 159);
 
             MasterCatalog.getAdditionalEntries += delegate (List<GameObject> list)
             {
@@ -582,6 +651,48 @@ namespace MegamanXVileSurvivor
             icon2 = MainAssetBundle.LoadAsset<Sprite>("Skill2Icon");
             icon3 = MainAssetBundle.LoadAsset<Sprite>("Skill3Icon");
             icon4 = MainAssetBundle.LoadAsset<Sprite>("Skill4Icon");
+        }
+    }
+}
+
+namespace EntityStates.ExampleSurvivorStates
+{
+    public class PassiveState : GenericCharacterMain
+    {
+        public float Timer;
+        public bool isHeated;
+        public float HeatTime = 20f;
+        public float baseDuration = 1f;
+        private float duration;
+        private Animator animator;
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+        }
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            Timer += Time.fixedDeltaTime;
+
+            if (Timer <= HeatTime)
+                isHeated = true;
+            else
+                isHeated = false;
+
+
+            return ;
+
+        }
+
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.Skill;
         }
     }
 }
