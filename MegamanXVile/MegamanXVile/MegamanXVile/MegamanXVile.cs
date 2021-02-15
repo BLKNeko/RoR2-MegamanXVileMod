@@ -5,7 +5,6 @@ using BepInEx;
 using R2API;
 using R2API.Utils;
 using EntityStates;
-using EntityStates.ExampleSurvivorStates;
 using RoR2;
 using RoR2.Skills;
 using RoR2.Projectile;
@@ -14,6 +13,8 @@ using UnityEngine.Networking;
 using KinematicCharacterController;
 using System.Security;
 using System.Security.Permissions;
+using MegamanXVile.SkillStates;
+using MegamanXVile.Materials;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -35,8 +36,8 @@ namespace MegamanXVileSurvivor
         public GameObject characterDisplay; // the prefab used for character select
         public GameObject doppelganger; // umbra shit
 
-        public static GameObject arrowProjectile; // prefab for our survivor's primary attack projectile
-        public static GameObject EletricSpark;
+        //public static GameObject arrowProjectile; // prefab for our survivor's primary attack projectile
+        //public static GameObject EletricSpark;
 
         private static readonly Color characterColor = new Color(0.55f, 0.55f, 0.55f); // color used for the survivor
 
@@ -44,6 +45,9 @@ namespace MegamanXVileSurvivor
         {
             Assets.PopulateAssets(); // first we load the assets from our assetbundle
             CreatePrefab(); // then we create our character's body prefab
+
+            RegisterProjectiles.Register();
+
             RegisterStates(); // register our skill entitystates for networking
             RegisterCharacter(); // and finally put our new survivor in the game
             CreateDoppelganger(); // not really mandatory, but it's simple and not having an umbra is just kinda lame
@@ -64,7 +68,7 @@ namespace MegamanXVileSurvivor
         internal static void CreatePrefab()
         {
             // first clone the commando prefab so we can turn that into our own survivor
-            characterPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody"), "ExampleSurvivorBody", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "CreatePrefab", 151);
+            characterPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody"), "VileBody", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "CreatePrefab", 151);
 
             characterPrefab.GetComponent<NetworkIdentity>().localPlayerAuthority = true;
 
@@ -107,32 +111,33 @@ namespace MegamanXVileSurvivor
             // set up the character body here
             CharacterBody bodyComponent = characterPrefab.GetComponent<CharacterBody>();
             bodyComponent.bodyIndex = -1;
-            bodyComponent.baseNameToken = "EXAMPLESURVIVOR_NAME"; // name token
-            bodyComponent.subtitleNameToken = "EXAMPLESURVIVOR_SUBTITLE"; // subtitle token- used for umbras
+            bodyComponent.baseNameToken = "VILE_NAME"; // name token
+            bodyComponent.subtitleNameToken = "VILE_SUBTITLE"; // subtitle token- used for umbras
             bodyComponent.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
+            bodyComponent.bodyFlags = CharacterBody.BodyFlags.IgnoreFallDamage;
             bodyComponent.rootMotionInMainState = false;
             bodyComponent.mainRootSpeed = 0;
-            bodyComponent.baseMaxHealth = 90;
-            bodyComponent.levelMaxHealth = 24;
-            bodyComponent.baseRegen = 0.5f;
-            bodyComponent.levelRegen = 0.25f;
+            bodyComponent.baseMaxHealth = 140;
+            bodyComponent.levelMaxHealth = 25;
+            bodyComponent.baseRegen = 0.4f;
+            bodyComponent.levelRegen = 0.28f;
             bodyComponent.baseMaxShield = 0;
-            bodyComponent.levelMaxShield = 0;
-            bodyComponent.baseMoveSpeed = 7;
-            bodyComponent.levelMoveSpeed = 0;
-            bodyComponent.baseAcceleration = 80;
-            bodyComponent.baseJumpPower = 15;
-            bodyComponent.levelJumpPower = 0;
-            bodyComponent.baseDamage = 15;
+            bodyComponent.levelMaxShield = 0.4f;
+            bodyComponent.baseMoveSpeed = 6f;
+            bodyComponent.levelMoveSpeed = 0.1f;
+            bodyComponent.baseAcceleration = 75;
+            bodyComponent.baseJumpPower = 25;
+            bodyComponent.levelJumpPower = 0.4f;
+            bodyComponent.baseDamage = 24;
             bodyComponent.levelDamage = 3f;
             bodyComponent.baseAttackSpeed = 1;
-            bodyComponent.levelAttackSpeed = 0;
+            bodyComponent.levelAttackSpeed = 0.05f;
             bodyComponent.baseCrit = 1;
-            bodyComponent.levelCrit = 0;
-            bodyComponent.baseArmor = 0;
-            bodyComponent.levelArmor = 0;
+            bodyComponent.levelCrit = 0.25f;
+            bodyComponent.baseArmor = 1;
+            bodyComponent.levelArmor = 0.6f;
             bodyComponent.baseJumpCount = 1;
-            bodyComponent.sprintingSpeedMultiplier = 1.45f;
+            bodyComponent.sprintingSpeedMultiplier = 1.4f;
             bodyComponent.wasLucky = false;
             bodyComponent.hideCrosshair = false;
             bodyComponent.aimOriginTransform = gameObject3.transform;
@@ -325,42 +330,8 @@ namespace MegamanXVileSurvivor
         private void RegisterCharacter()
         {
             // now that the body prefab's set up, clone it here to make the display prefab
-            characterDisplay = PrefabAPI.InstantiateClone(characterPrefab.GetComponent<ModelLocator>().modelBaseTransform.gameObject, "ExampleSurvivorDisplay", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 153);
+            characterDisplay = PrefabAPI.InstantiateClone(characterPrefab.GetComponent<ModelLocator>().modelBaseTransform.gameObject, "VileDisplay", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 153);
             characterDisplay.AddComponent<NetworkIdentity>();
-
-            // clone rex's syringe projectile prefab here to use as our own projectile
-            arrowProjectile = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/Projectiles/SyringeProjectile"), "Prefabs/Projectiles/ExampleArrowProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
-
-            // just setting the numbers to 1 as the entitystate will take care of those
-            arrowProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
-            arrowProjectile.GetComponent<ProjectileDamage>().damage = 1f;
-            arrowProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
-
-            // register it for networking
-            if (arrowProjectile) PrefabAPI.RegisterNetworkPrefab(arrowProjectile);
-
-            //-------------------------------------START --------------------------------------------
-
-            // clone rex's syringe projectile prefab here to use as our own projectile
-            EletricSpark = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/MageLightningBombProjectile"), "Prefabs/Projectiles/ESparkProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
-
-            // just setting the numbers to 1 as the entitystate will take care of those
-            EletricSpark.GetComponent<ProjectileController>().procCoefficient = 1f;
-            EletricSpark.GetComponent<ProjectileDamage>().damage = 1f;
-            EletricSpark.GetComponent<ProjectileDamage>().damageType = DamageType.Shock5s;
-
-            // register it for networking
-            if (EletricSpark) PrefabAPI.RegisterNetworkPrefab(EletricSpark);
-
-            //--------------------------------------END --------------------------------------------
-
-            // add it to the projectile catalog or it won't work in multiplayer
-            ProjectileCatalog.getAdditionalEntries += list =>
-            {
-                list.Add(arrowProjectile);
-                list.Add(EletricSpark);
-            };
-
 
             // write a clean survivor description here!
             string desc = "Example Survivor something something.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
@@ -370,16 +341,16 @@ namespace MegamanXVileSurvivor
             desc = desc + "< ! > Sample Text 4.</color>" + Environment.NewLine + Environment.NewLine;
 
             // add the language tokens
-            LanguageAPI.Add("EXAMPLESURVIVOR_NAME", "Example Survivor");
-            LanguageAPI.Add("EXAMPLESURVIVOR_DESCRIPTION", desc);
-            LanguageAPI.Add("EXAMPLESURVIVOR_SUBTITLE", "Template for Custom Survivors");
+            LanguageAPI.Add("VILE_NAME", "Vile");
+            LanguageAPI.Add("VILE_DESCRIPTION", desc);
+            LanguageAPI.Add("VILE_SUBTITLE", "EX-Maverick-Hunter");
 
             // add our new survivor to the game~
             SurvivorDef survivorDef = new SurvivorDef
             {
-                name = "EXAMPLESURVIVOR_NAME",
+                name = "VILE_NAME",
                 unlockableName = "",
-                descriptionToken = "EXAMPLESURVIVOR_DESCRIPTION",
+                descriptionToken = "VILE_DESCRIPTION",
                 primaryColor = characterColor,
                 bodyPrefab = characterPrefab,
                 displayPrefab = characterDisplay
@@ -414,7 +385,8 @@ namespace MegamanXVileSurvivor
         void RegisterStates()
         {
             // register the entitystates for networking reasons
-            LoadoutAPI.AddSkill(typeof(ExampleSurvivorFireArrow));
+            LoadoutAPI.AddSkill(typeof(CherryBlast));
+            LoadoutAPI.AddSkill(typeof(EletricSpark));
         }
 
         void PassiveSetup()
@@ -422,12 +394,12 @@ namespace MegamanXVileSurvivor
             // set up the passive skill here if you want
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
 
-            LanguageAPI.Add("EXAMPLESURVIVOR_PASSIVE_NAME", "Passive");
-            LanguageAPI.Add("EXAMPLESURVIVOR_PASSIVE_DESCRIPTION", "<style=cIsUtility>Doot</style> <style=cIsHealing>doot</style>.");
+            LanguageAPI.Add("VILE_PASSIVE_NAME", "Passive");
+            LanguageAPI.Add("VILE_PASSIVE_DESCRIPTION", "<style=cIsUtility>Doot</style> <style=cIsHealing>doot</style>.");
 
             component.passiveSkill.enabled = true;
-            component.passiveSkill.skillNameToken = "EXAMPLESURVIVOR_PASSIVE_NAME";
-            component.passiveSkill.skillDescriptionToken = "EXAMPLESURVIVOR_PASSIVE_DESCRIPTION";
+            component.passiveSkill.skillNameToken = "VILE_PASSIVE_NAME";
+            component.passiveSkill.skillDescriptionToken = "VILE_PASSIVE_DESCRIPTION";
             component.passiveSkill.icon = Assets.iconP;
         }
 
@@ -441,7 +413,7 @@ namespace MegamanXVileSurvivor
             // set up your primary skill def here!
 
             SkillDef mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
-            mySkillDef.activationState = new SerializableEntityStateType(typeof(ExampleSurvivorFireArrow));
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(CherryBlast));
             mySkillDef.activationStateMachineName = "Weapon";
             mySkillDef.baseMaxStock = 1;
             mySkillDef.baseRechargeInterval = 0f;
@@ -614,203 +586,3 @@ namespace MegamanXVileSurvivor
     }
 }
 
-
-
-// the entitystates namespace is used to make the skills, i'm not gonna go into detail here but it's easy to learn through trial and error
-namespace EntityStates.ExampleSurvivorStates
-{
-    public class ExampleSurvivorFireArrow : BaseSkillState
-    {
-        public float damageCoefficient = 0.25f;
-        public float baseDuration = 1f;
-        public float recoil = 1f;
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerClayBruiserMinigun");
-        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/Hitspark1");
-        public int bulletcount;
-
-        public float shootdelay = 1.5f;
-        public float timer = 2f;
-
-        private float duration;
-        private float fireDuration;
-        private bool hasFired = true;
-        private Animator animator;
-        private string muzzleString;
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            if (bulletcount == 0)
-                bulletcount = 1;
-
-            this.duration = this.baseDuration / base.attackSpeedStat;
-            this.fireDuration = 0.25f * this.duration;
-            base.characterBody.SetAimTimer(2f);
-            this.animator = base.GetModelAnimator();
-            this.muzzleString = "Weapon";
-            shootdelay -= (base.attackSpeedStat / 10);
-
-
-            base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-        }
-
-        private void FireArrow()
-        {
-            if (!this.hasFired)
-            {
-                this.hasFired = true;
-
-                base.characterBody.AddSpreadBloom(0.6f);
-                Ray aimRay = base.GetAimRay();
-                EffectManager.SimpleMuzzleFlash(Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
-
-                if (base.isAuthority)
-                {
-                    //ProjectileManager.instance.FireProjectile(MegamanXVileSurvivor.MegamanXVile.arrowProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
-                    new BulletAttack
-                    {
-                        owner = base.gameObject,
-                        weapon = base.gameObject,
-                        origin = aimRay.origin,
-                        aimVector = aimRay.direction,
-                        minSpread = 0.1f,
-                        maxSpread = 0.6f,
-                        damage = damageCoefficient * this.damageStat,
-                        damageType = (Util.CheckRoll(5f, base.characterBody.master) ? DamageType.SlowOnHit : DamageType.Generic),
-                        procChainMask = default(ProcChainMask),
-                        force = 45f,
-                        radius = 0.4f,
-                        sniper = true,
-                        spreadPitchScale = 0.5f,
-                        spreadYawScale = 0.5f,
-                        tracerEffectPrefab = ExampleSurvivorFireArrow.tracerEffectPrefab,
-                        hitMask = LayerIndex.CommonMasks.bullet,
-                        falloffModel = BulletAttack.FalloffModel.None,
-                        muzzleName = muzzleString,
-                        hitEffectPrefab = hitEffectPrefab,
-                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        isCrit = Util.CheckRoll(base.critStat, base.characterBody.master)
-                    }.Fire();
-
-                }
-            }
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-
-            timer += Time.deltaTime;
-
-            if (base.inputBank.skill1.down && hasFired)
-            {
-                if (timer > shootdelay)
-                {
-                    if (shootdelay <= 0.06f)
-                        shootdelay = 0.06f;
-                    else
-                        shootdelay -= (0.15f + (base.attackSpeedStat/50));
-
-                    timer = 0;
-                    hasFired = false;
-                    FireArrow();
-                }
-            }
-
-
-           // if (base.fixedAge >= this.fireDuration)
-           // {
-                //FireArrow();
-            //}
-
-            if (base.fixedAge >= this.duration && base.isAuthority && !base.inputBank.skill1.down)
-            {
-                shootdelay = 1.5f;
-                this.outer.SetNextStateToMain();
-            }
-        }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.Skill;
-        }
-    }
-}
-
-namespace EntityStates.ExampleSurvivorStates
-{
-    public class EletricSpark : BaseSkillState
-    {
-        public float damageCoefficient = 10f;
-        public float baseDuration = 1.5f;
-        public float recoil = 1f;
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerToolbotRebar");
-
-        private float duration;
-        private float fireDuration;
-        private bool hasFired;
-        private Animator animator;
-        private string muzzleString;
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            this.duration = this.baseDuration;
-            this.fireDuration = 0.25f * this.duration;
-            base.characterBody.SetAimTimer(2f);
-            this.animator = base.GetModelAnimator();
-            this.muzzleString = "Weapon";
-
-
-            base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);
-        }
-
-        public override void OnExit()
-        {
-            base.OnExit();
-        }
-
-        private void FireES()
-        {
-            if (!this.hasFired)
-            {
-                this.hasFired = true;
-
-                base.characterBody.AddSpreadBloom(0.15f);
-                Ray aimRay = base.GetAimRay();
-                //EffectManager.SimpleMuzzleFlash(Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
-                EffectManager.SimpleMuzzleFlash(Mage.Weapon.FireLaserbolt.impactEffectPrefab, base.gameObject, this.muzzleString, false);
-
-                if (base.isAuthority)
-                {
-                    ProjectileManager.instance.FireProjectile(MegamanXVileSurvivor.MegamanXVile.EletricSpark, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
-                }
-            }
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-
-            if (base.fixedAge >= this.fireDuration)
-            {
-                FireES();
-            }
-
-            if (base.fixedAge >= this.duration && base.isAuthority)
-            {
-                this.outer.SetNextStateToMain();
-            }
-        }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.Skill;
-        }
-    }
-}

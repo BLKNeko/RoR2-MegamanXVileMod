@@ -107,8 +107,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SkillStates\" />
-  </ItemGroup>
-
 </Project>
