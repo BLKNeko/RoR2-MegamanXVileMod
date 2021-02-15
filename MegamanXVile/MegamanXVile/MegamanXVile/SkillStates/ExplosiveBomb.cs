@@ -69,8 +69,6 @@ namespace MegamanXVile.SkillStates
 
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
-                PassiveState VP = new PassiveState();
-                VP.Timer = 0f;
                 this.outer.SetNextStateToMain();
             }
         }

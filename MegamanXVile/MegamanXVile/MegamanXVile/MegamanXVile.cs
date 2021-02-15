@@ -661,7 +661,7 @@ namespace EntityStates.ExampleSurvivorStates
     {
         public float Timer;
         public bool isHeated;
-        public float HeatTime = 20f;
+        public float HeatTime = 8f;
         public float baseDuration = 1f;
         private float duration;
         private Animator animator;
@@ -679,14 +679,29 @@ namespace EntityStates.ExampleSurvivorStates
             base.FixedUpdate();
             Timer += Time.fixedDeltaTime;
 
+            if (base.inputBank.skill2.justReleased)
+            {
+                Timer = 0f;
+            }
+
             if (Timer <= HeatTime)
-                isHeated = true;
+                CherryBlast.heat = true;
             else
-                isHeated = false;
+                CherryBlast.heat = false;
 
 
             return ;
 
+        }
+
+        public static bool GetHeat()
+        {
+            PassiveState VP = new PassiveState();
+
+
+            bool heat = VP.isHeated;
+
+            return heat;
         }
 
 

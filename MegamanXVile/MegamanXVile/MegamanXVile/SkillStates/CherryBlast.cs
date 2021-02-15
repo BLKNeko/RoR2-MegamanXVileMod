@@ -19,8 +19,8 @@ namespace MegamanXVile.SkillStates
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerClayBruiserMinigun");
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/Hitspark1");
         public int bulletcount;
-        PassiveState VP = new PassiveState();
-        public bool heat => VP.isHeated;
+
+        public static bool heat;
 
         public float shootdelay = 1.5f;
         public float timer = 2f;
