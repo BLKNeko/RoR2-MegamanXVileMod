@@ -547,7 +547,8 @@ namespace EntityStates.ExampleSurvivorStates
         public float damageCoefficient = 0.3f;
         public float baseDuration = 1.5f;
         public float recoil = 1f;
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerToolbotRebar");
+        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerClayBruiserMinigun");
+        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/Hitspark1");
         public int bulletcount;
 
         public float shootdelay = 1.5f;
@@ -614,7 +615,7 @@ namespace EntityStates.ExampleSurvivorStates
                         hitMask = LayerIndex.CommonMasks.bullet,
                         falloffModel = BulletAttack.FalloffModel.None,
                         muzzleName = muzzleString,
-                        //hitEffectPrefab = chargeShot.hitEffectChargePrefab,
+                        hitEffectPrefab = hitEffectPrefab,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                         isCrit = Util.CheckRoll(base.critStat, base.characterBody.master)
                     }.Fire();
