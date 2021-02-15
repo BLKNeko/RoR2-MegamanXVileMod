@@ -544,25 +544,33 @@ namespace EntityStates.ExampleSurvivorStates
 {
     public class ExampleSurvivorFireArrow : BaseSkillState
     {
-        public float damageCoefficient = 2f;
-        public float baseDuration = 0.75f;
+        public float damageCoefficient = 0.3f;
+        public float baseDuration = 1.5f;
         public float recoil = 1f;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerToolbotRebar");
+        public int bulletcount;
+
+        public float shootdelay = 1.5f;
+        public float timer = 2f;
 
         private float duration;
         private float fireDuration;
-        private bool hasFired;
+        private bool hasFired = true;
         private Animator animator;
         private string muzzleString;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = this.baseDuration / this.attackSpeedStat;
+            if (bulletcount == 0)
+                bulletcount = 1;
+
+            this.duration = this.baseDuration;
             this.fireDuration = 0.25f * this.duration;
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
             this.muzzleString = "Weapon";
+            shootdelay -= (base.attackSpeedStat / 10);
 
 
             base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);
@@ -579,13 +587,38 @@ namespace EntityStates.ExampleSurvivorStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.75f);
+                base.characterBody.AddSpreadBloom(0.15f);
                 Ray aimRay = base.GetAimRay();
                 EffectManager.SimpleMuzzleFlash(Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
 
                 if (base.isAuthority)
                 {
-                    ProjectileManager.instance.FireProjectile(MegamanXVileSurvivor.MegamanXVile.arrowProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    //ProjectileManager.instance.FireProjectile(MegamanXVileSurvivor.MegamanXVile.arrowProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    new BulletAttack
+                    {
+                        owner = base.gameObject,
+                        weapon = base.gameObject,
+                        origin = aimRay.origin,
+                        aimVector = aimRay.direction,
+                        minSpread = 0.1f,
+                        maxSpread = 0.6f,
+                        damage = damageCoefficient * this.damageStat,
+                        damageType = (Util.CheckRoll(5f, base.characterBody.master) ? DamageType.SlowOnHit : DamageType.Generic),
+                        procChainMask = default(ProcChainMask),
+                        force = 45f,
+                        radius = 0.4f,
+                        sniper = true,
+                        spreadPitchScale = 0.5f,
+                        spreadYawScale = 0.5f,
+                        tracerEffectPrefab = ExampleSurvivorFireArrow.tracerEffectPrefab,
+                        hitMask = LayerIndex.CommonMasks.bullet,
+                        falloffModel = BulletAttack.FalloffModel.None,
+                        muzzleName = muzzleString,
+                        //hitEffectPrefab = chargeShot.hitEffectChargePrefab,
+                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
+                        isCrit = Util.CheckRoll(base.critStat, base.characterBody.master)
+                    }.Fire();
+
                 }
             }
         }
@@ -594,13 +627,32 @@ namespace EntityStates.ExampleSurvivorStates
         {
             base.FixedUpdate();
 
-            if (base.fixedAge >= this.fireDuration)
+            timer += Time.deltaTime;
+
+            if (base.inputBank.skill1.down && hasFired)
             {
-                FireArrow();
+                if (timer > shootdelay)
+                {
+                    if (shootdelay <= 0.1f)
+                        shootdelay = 0.1f;
+                    else
+                        shootdelay -= 0.15f;
+
+                    timer = 0;
+                    hasFired = false;
+                    FireArrow();
+                }
             }
 
-            if (base.fixedAge >= this.duration && base.isAuthority)
+
+           // if (base.fixedAge >= this.fireDuration)
+           // {
+                //FireArrow();
+            //}
+
+            if (base.fixedAge >= this.duration && base.isAuthority && !base.inputBank.skill1.down)
             {
+                shootdelay = 2f;
                 this.outer.SetNextStateToMain();
             }
         }
