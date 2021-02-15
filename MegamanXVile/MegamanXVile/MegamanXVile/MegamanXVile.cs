@@ -476,16 +476,16 @@ namespace MegamanXVileSurvivor
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
 
-            LanguageAPI.Add("VILE_SECONDARY_NAME", "BOMBTEST");
-            LanguageAPI.Add("VILE_SECONDARY_DESCRIPTION", "Vile's gatling can fire super fast bullets after completely heated, dealing <style=cIsDamage>25% damage</style>.");
+            LanguageAPI.Add("VILE_SECONDARY_NAME", "BumpityBoom");
+            LanguageAPI.Add("VILE_SECONDARY_DESCRIPTION", "Vile throws two granades, dealing <style=cIsDamage>250% damage</style>.");
 
             // set up your primary skill def here!
 
             SkillDef mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
-            mySkillDef.activationState = new SerializableEntityStateType(typeof(ExplosiveBomb));
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(BumpityBoom));
             mySkillDef.activationStateMachineName = "Weapon";
-            mySkillDef.baseMaxStock = 1;
-            mySkillDef.baseRechargeInterval = 0f;
+            mySkillDef.baseMaxStock = 2;
+            mySkillDef.baseRechargeInterval = 8f;
             mySkillDef.beginSkillCooldownOnSkillEnd = false;
             mySkillDef.canceledFromSprinting = false;
             mySkillDef.fullRestockOnAssign = true;
@@ -661,7 +661,7 @@ namespace EntityStates.ExampleSurvivorStates
     {
         public float Timer;
         public bool isHeated;
-        public float HeatTime = 8f;
+        public float HeatTime = 4f;
         public float baseDuration = 1f;
         private float duration;
         private Animator animator;

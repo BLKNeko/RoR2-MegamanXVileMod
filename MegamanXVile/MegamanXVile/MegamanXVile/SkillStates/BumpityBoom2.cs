@@ -8,10 +8,10 @@ using System.Reflection;
 
 namespace MegamanXVile.SkillStates
 {
-    public class ExplosiveBomb : BaseSkillState
+    public class BumpityBoom2 : BaseSkillState
     {
-        public float damageCoefficient = 10f;
-        public float baseDuration = 1.5f;
+        public float damageCoefficient = 2.5f;
+        public float baseDuration = 0.5f;
         public float recoil = 1f;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerToolbotRebar");
 
@@ -20,6 +20,7 @@ namespace MegamanXVile.SkillStates
         private bool hasFired;
         private Animator animator;
         private string muzzleString;
+        private string muzzleString2;
 
         public override void OnEnter()
         {
@@ -29,6 +30,7 @@ namespace MegamanXVile.SkillStates
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
             this.muzzleString = "Weapon";
+            this.muzzleString2 = "Weapon";
 
 
             base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);
@@ -53,7 +55,9 @@ namespace MegamanXVile.SkillStates
 
                 if (base.isAuthority)
                 {
-                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.arrowProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.BumpityBombProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.BumpityBombProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+
                 }
             }
         }
