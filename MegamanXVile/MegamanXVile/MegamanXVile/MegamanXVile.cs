@@ -36,6 +36,7 @@ namespace MegamanXVileSurvivor
         public GameObject doppelganger; // umbra shit
 
         public static GameObject arrowProjectile; // prefab for our survivor's primary attack projectile
+        public static GameObject EletricSpark;
 
         private static readonly Color characterColor = new Color(0.55f, 0.55f, 0.55f); // color used for the survivor
 
@@ -338,10 +339,26 @@ namespace MegamanXVileSurvivor
             // register it for networking
             if (arrowProjectile) PrefabAPI.RegisterNetworkPrefab(arrowProjectile);
 
+            //-------------------------------------START --------------------------------------------
+
+            // clone rex's syringe projectile prefab here to use as our own projectile
+            EletricSpark = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/MageLightningBombProjectile"), "Prefabs/Projectiles/ESparkProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            EletricSpark.GetComponent<ProjectileController>().procCoefficient = 1f;
+            EletricSpark.GetComponent<ProjectileDamage>().damage = 1f;
+            EletricSpark.GetComponent<ProjectileDamage>().damageType = DamageType.Shock5s;
+
+            // register it for networking
+            if (EletricSpark) PrefabAPI.RegisterNetworkPrefab(EletricSpark);
+
+            //--------------------------------------END --------------------------------------------
+
             // add it to the projectile catalog or it won't work in multiplayer
             ProjectileCatalog.getAdditionalEntries += list =>
             {
                 list.Add(arrowProjectile);
+                list.Add(EletricSpark);
             };
 
 
@@ -391,6 +408,7 @@ namespace MegamanXVileSurvivor
 
             PassiveSetup();
             PrimarySetup();
+            UtilitySetup();
         }
 
         void RegisterStates()
@@ -452,6 +470,65 @@ namespace MegamanXVileSurvivor
             LoadoutAPI.AddSkillFamily(newFamily);
             component.primary.SetFieldValue("_skillFamily", newFamily);
             SkillFamily skillFamily = component.primary.skillFamily;
+
+            skillFamily.variants[0] = new SkillFamily.Variant
+            {
+                skillDef = mySkillDef,
+                unlockableName = "",
+                viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
+            };
+
+
+            // add this code after defining a new skilldef if you're adding an alternate skill
+
+            /*Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+            {
+                skillDef = newSkillDef,
+                unlockableName = "",
+                viewableNode = new ViewablesCatalog.Node(newSkillDef.skillNameToken, false, null)
+            };*/
+        }
+
+        void UtilitySetup()
+        {
+            SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
+
+            LanguageAPI.Add("VILE_UTILITY_NAME", "EletricSpark");
+            LanguageAPI.Add("VILE_UTILITY_DESCRIPTION", "Fire an arrow, dealing <style=cIsDamage>200% damage</style>.");
+
+            // set up your primary skill def here!
+
+            SkillDef mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(EletricSpark));
+            mySkillDef.activationStateMachineName = "Weapon";
+            mySkillDef.baseMaxStock = 1;
+            mySkillDef.baseRechargeInterval = 10f;
+            mySkillDef.beginSkillCooldownOnSkillEnd = false;
+            mySkillDef.canceledFromSprinting = false;
+            mySkillDef.fullRestockOnAssign = true;
+            mySkillDef.interruptPriority = InterruptPriority.Any;
+            mySkillDef.isBullets = false;
+            mySkillDef.isCombatSkill = true;
+            mySkillDef.mustKeyPress = false;
+            mySkillDef.noSprint = true;
+            mySkillDef.rechargeStock = 1;
+            mySkillDef.requiredStock = 1;
+            mySkillDef.shootDelay = 0f;
+            mySkillDef.stockToConsume = 1;
+            mySkillDef.icon = Assets.icon3;
+            mySkillDef.skillDescriptionToken = "VILE_UTILITY_DESCRIPTION";
+            mySkillDef.skillName = "VILE_UTILITY_NAME";
+            mySkillDef.skillNameToken = "VILE_UTILITY_NAME";
+
+            LoadoutAPI.AddSkillDef(mySkillDef);
+
+            component.utility = characterPrefab.AddComponent<GenericSkill>();
+            SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            newFamily.variants = new SkillFamily.Variant[1];
+            LoadoutAPI.AddSkillFamily(newFamily);
+            component.utility.SetFieldValue("_skillFamily", newFamily);
+            SkillFamily skillFamily = component.utility.skillFamily;
 
             skillFamily.variants[0] = new SkillFamily.Variant
             {
@@ -544,8 +621,8 @@ namespace EntityStates.ExampleSurvivorStates
 {
     public class ExampleSurvivorFireArrow : BaseSkillState
     {
-        public float damageCoefficient = 0.3f;
-        public float baseDuration = 1.5f;
+        public float damageCoefficient = 0.25f;
+        public float baseDuration = 1f;
         public float recoil = 1f;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerClayBruiserMinigun");
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/Hitspark1");
@@ -566,7 +643,7 @@ namespace EntityStates.ExampleSurvivorStates
             if (bulletcount == 0)
                 bulletcount = 1;
 
-            this.duration = this.baseDuration;
+            this.duration = this.baseDuration / base.attackSpeedStat;
             this.fireDuration = 0.25f * this.duration;
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
@@ -588,7 +665,7 @@ namespace EntityStates.ExampleSurvivorStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.15f);
+                base.characterBody.AddSpreadBloom(0.6f);
                 Ray aimRay = base.GetAimRay();
                 EffectManager.SimpleMuzzleFlash(Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
 
@@ -634,10 +711,10 @@ namespace EntityStates.ExampleSurvivorStates
             {
                 if (timer > shootdelay)
                 {
-                    if (shootdelay <= 0.1f)
-                        shootdelay = 0.1f;
+                    if (shootdelay <= 0.06f)
+                        shootdelay = 0.06f;
                     else
-                        shootdelay -= 0.15f;
+                        shootdelay -= (0.15f + (base.attackSpeedStat/50));
 
                     timer = 0;
                     hasFired = false;
@@ -653,7 +730,80 @@ namespace EntityStates.ExampleSurvivorStates
 
             if (base.fixedAge >= this.duration && base.isAuthority && !base.inputBank.skill1.down)
             {
-                shootdelay = 2f;
+                shootdelay = 1.5f;
+                this.outer.SetNextStateToMain();
+            }
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.Skill;
+        }
+    }
+}
+
+namespace EntityStates.ExampleSurvivorStates
+{
+    public class EletricSpark : BaseSkillState
+    {
+        public float damageCoefficient = 10f;
+        public float baseDuration = 1.5f;
+        public float recoil = 1f;
+        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerToolbotRebar");
+
+        private float duration;
+        private float fireDuration;
+        private bool hasFired;
+        private Animator animator;
+        private string muzzleString;
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            this.duration = this.baseDuration;
+            this.fireDuration = 0.25f * this.duration;
+            base.characterBody.SetAimTimer(2f);
+            this.animator = base.GetModelAnimator();
+            this.muzzleString = "Weapon";
+
+
+            base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+
+        private void FireES()
+        {
+            if (!this.hasFired)
+            {
+                this.hasFired = true;
+
+                base.characterBody.AddSpreadBloom(0.15f);
+                Ray aimRay = base.GetAimRay();
+                //EffectManager.SimpleMuzzleFlash(Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(Mage.Weapon.FireLaserbolt.impactEffectPrefab, base.gameObject, this.muzzleString, false);
+
+                if (base.isAuthority)
+                {
+                    ProjectileManager.instance.FireProjectile(MegamanXVileSurvivor.MegamanXVile.EletricSpark, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                }
+            }
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if (base.fixedAge >= this.fireDuration)
+            {
+                FireES();
+            }
+
+            if (base.fixedAge >= this.duration && base.isAuthority)
+            {
                 this.outer.SetNextStateToMain();
             }
         }

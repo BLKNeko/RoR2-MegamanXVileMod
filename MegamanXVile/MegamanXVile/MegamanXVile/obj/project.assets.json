@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\JOGOS\\Tools\\ROR2 ModdingTools\\MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.csproj",
+      "projectUniqueName": "C:\\JOGOS\\Tools\\ROR2 ModdingTools\\MegamanXVileMod\\RoR2-MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.csproj",
       "projectName": "MegamanXVile",
-      "projectPath": "C:\\JOGOS\\Tools\\ROR2 ModdingTools\\MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.csproj",
+      "projectPath": "C:\\JOGOS\\Tools\\ROR2 ModdingTools\\MegamanXVileMod\\RoR2-MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.csproj",
       "packagesPath": "C:\\Users\\augus\\.nuget\\packages\\",
-      "outputPath": "C:\\JOGOS\\Tools\\ROR2 ModdingTools\\MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\obj\\",
+      "outputPath": "C:\\JOGOS\\Tools\\ROR2 ModdingTools\\MegamanXVileMod\\RoR2-MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
