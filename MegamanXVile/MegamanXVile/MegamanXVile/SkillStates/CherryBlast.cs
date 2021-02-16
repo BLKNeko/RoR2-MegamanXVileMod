@@ -21,6 +21,7 @@ namespace MegamanXVile.SkillStates
         public int bulletcount;
 
         public static bool heat;
+        public static int buffSkillIndex;
 
         public float shootdelay = 1.5f;
         public float timer = 2f;
@@ -45,7 +46,7 @@ namespace MegamanXVile.SkillStates
 
             
             if (heat)
-                shootdelay = 0.06f;
+                shootdelay = 0.86f;
             else
                 shootdelay -= (base.attackSpeedStat / 10);
 
@@ -71,6 +72,7 @@ namespace MegamanXVile.SkillStates
                 if (base.isAuthority)
                 {
                     //ProjectileManager.instance.FireProjectile(MegamanXVileSurvivor.MegamanXVile.arrowProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    /*
                     new BulletAttack
                     {
                         owner = base.gameObject,
@@ -95,7 +97,50 @@ namespace MegamanXVile.SkillStates
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                         isCrit = Util.CheckRoll(base.critStat, base.characterBody.master)
                     }.Fire();
+                    */
+                    BulletAttack BT = new BulletAttack();
+                    BT.owner = base.gameObject;
+                    BT.weapon = base.gameObject;
+                    BT.origin = aimRay.origin;
+                    BT.aimVector = aimRay.direction;
+                    BT.minSpread = 0.1f;
+                    BT.maxSpread = 0.6f;
+                    BT.damage = damageCoefficient * this.damageStat;
+                    BT.procChainMask = default(ProcChainMask);
+                    BT.force = 45f;
+                    BT.radius = 0.4f;
+                    BT.sniper = true;
+                    BT.spreadPitchScale = 0.5f;
+                    BT.spreadYawScale = 0.5f;
+                    BT.tracerEffectPrefab = CherryBlast.tracerEffectPrefab;
+                    BT.hitMask = LayerIndex.CommonMasks.bullet;
+                    BT.falloffModel = BulletAttack.FalloffModel.None;
+                    BT.muzzleName = muzzleString;
+                    BT.hitEffectPrefab = hitEffectPrefab;
+                    BT.queryTriggerInteraction = QueryTriggerInteraction.UseGlobal;
+                    BT.isCrit = Util.CheckRoll(base.critStat, base.characterBody.master);
 
+                    switch(buffSkillIndex)
+                    {
+                        case 0:
+                            BT.damageType = (Util.CheckRoll(5f, base.characterBody.master) ? DamageType.SlowOnHit : DamageType.Generic);
+                            break;
+                        case 1:
+                            BT.damageType = (Util.CheckRoll(8f, base.characterBody.master) ? DamageType.Stun1s : DamageType.Generic);
+                            break;
+                        case 2:
+                            BT.damageType = (Util.CheckRoll(8f, base.characterBody.master) ? DamageType.Shock5s : DamageType.Generic);
+                            break;
+                        case 3:
+                            BT.damageType = (Util.CheckRoll(8f, base.characterBody.master) ? DamageType.IgniteOnHit : DamageType.Generic);
+                            break;
+                        default:
+                            BT.damageType = (Util.CheckRoll(5f, base.characterBody.master) ? DamageType.SlowOnHit : DamageType.Generic);
+                            break;
+
+                    }
+
+                    BT.Fire();
                 }
             }
         }

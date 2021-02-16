@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 195415917
+CRC: 427644674
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e03b32306122d5c59550e22c14346652
+    Hash: 98ea8a61f49cc293612381e890d11a26
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 37d7ae37fbed6ed5b9d3b1c92b3cf570
+    Hash: 03dd90f9ff471b5553f91cd7d4e50849
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -40,14 +40,20 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 67079b849227b734694872d8810229b8, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: aaabc320440a02340b0239f0cf1745a2, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 24f98ceb39626e542bce4568de94b61d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: aaabc320440a02340b0239f0cf1745a2, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 135
   Script: {instanceID: 0}
 - Class: 136
   Script: {instanceID: 0}
 - Class: 137
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -72,6 +78,8 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/ch_010_000_Vile.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/texExampleSurvivor.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/IdleeXcella.anim
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/Vile Mk2 Texture.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/MagicFireBig.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/CH010_000_U_Vile_Mixamo.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlExampleSurvivor.prefab
 Dependencies: []

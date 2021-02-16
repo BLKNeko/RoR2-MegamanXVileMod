@@ -304,6 +304,28 @@ namespace MegamanXVileSurvivor
             hurtBoxGroup.mainHurtBox = componentInChildren;
             hurtBoxGroup.bullseyeCount = 1;
 
+            //----------------------------------------------------------------------------------------------------------------
+            //BurningDrive HitBox
+            HitBoxGroup hitBoxGroup = model.AddComponent<HitBoxGroup>();
+
+            GameObject GroundBox = new GameObject("GroundBox");
+            GroundBox.transform.parent = childLocator.FindChild("GroundBox");
+            GroundBox.transform.localPosition = new Vector3(0f, 0f, 0f);
+            GroundBox.transform.localRotation = Quaternion.identity;
+            GroundBox.transform.localScale = new Vector3(800f, 800f, 800f);
+
+            HitBox hitBox = GroundBox.AddComponent<HitBox>();
+            GroundBox.layer = LayerIndex.projectile.intVal;
+
+            hitBoxGroup.hitBoxes = new HitBox[]
+            {
+                hitBox
+            };
+
+            hitBoxGroup.groupName = "GroundBox";
+
+            //----------------------------------------------------------------------------------------------------------------------
+
             // this is for handling footsteps, not needed but polish is always good
             FootstepHandler footstepHandler = model.AddComponent<FootstepHandler>();
             footstepHandler.baseFootstepString = "Play_player_footstep";
@@ -390,6 +412,7 @@ namespace MegamanXVileSurvivor
             PrimarySetup();
             SecondarySetup();
             UtilitySetup();
+            SpecialSetup();
         }
 
         void RegisterStates()
@@ -397,6 +420,8 @@ namespace MegamanXVileSurvivor
             // register the entitystates for networking reasons
             LoadoutAPI.AddSkill(typeof(CherryBlast));
             LoadoutAPI.AddSkill(typeof(EletricSpark));
+            LoadoutAPI.AddSkill(typeof(BumpityBoom));
+            LoadoutAPI.AddSkill(typeof(BumpityBoom2));
         }
 
         void PassiveSetup()
@@ -590,6 +615,65 @@ namespace MegamanXVileSurvivor
             };*/
         }
 
+        void SpecialSetup()
+        {
+            SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
+
+            LanguageAPI.Add("VILE_SPECIAL_NAME", "BDRIVE");
+            LanguageAPI.Add("VILE_SPECIAL_DESCRIPTION", "Fire an eletric bomb, dealing <style=cIsDamage>1000% damage</style> and paralize enemies for 5s.");
+
+            // set up your primary skill def here!
+
+            SkillDef mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(BurningDrive));
+            mySkillDef.activationStateMachineName = "Weapon";
+            mySkillDef.baseMaxStock = 1;
+            mySkillDef.baseRechargeInterval = 0f;
+            mySkillDef.beginSkillCooldownOnSkillEnd = false;
+            mySkillDef.canceledFromSprinting = false;
+            mySkillDef.fullRestockOnAssign = true;
+            mySkillDef.interruptPriority = InterruptPriority.Any;
+            mySkillDef.isBullets = false;
+            mySkillDef.isCombatSkill = true;
+            mySkillDef.mustKeyPress = false;
+            mySkillDef.noSprint = true;
+            mySkillDef.rechargeStock = 1;
+            mySkillDef.requiredStock = 1;
+            mySkillDef.shootDelay = 0f;
+            mySkillDef.stockToConsume = 1;
+            mySkillDef.icon = Assets.icon4;
+            mySkillDef.skillDescriptionToken = "VILE_SPECIAL_DESCRIPTION";
+            mySkillDef.skillName = "VILE_SPECIAL_NAME";
+            mySkillDef.skillNameToken = "VILE_SPECIAL_NAME";
+
+            LoadoutAPI.AddSkillDef(mySkillDef);
+
+            component.special = characterPrefab.AddComponent<GenericSkill>();
+            SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            newFamily.variants = new SkillFamily.Variant[1];
+            LoadoutAPI.AddSkillFamily(newFamily);
+            component.special.SetFieldValue("_skillFamily", newFamily);
+            SkillFamily skillFamily = component.special.skillFamily;
+
+            skillFamily.variants[0] = new SkillFamily.Variant
+            {
+                skillDef = mySkillDef,
+                unlockableName = "",
+                viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
+            };
+
+
+            // add this code after defining a new skilldef if you're adding an alternate skill
+
+            /*Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
+            {
+                skillDef = newSkillDef,
+                unlockableName = "",
+                viewableNode = new ViewablesCatalog.Node(newSkillDef.skillNameToken, false, null)
+            };*/
+        }
+
         private void CreateDoppelganger()
         {
             // set up the doppelganger for artifact of vengeance here
@@ -618,6 +702,8 @@ namespace MegamanXVileSurvivor
 
         public static Texture charPortrait;
 
+        public static GameObject BurningDriveVFX;
+
         public static Sprite iconP;
         public static Sprite icon1;
         public static Sprite icon2;
@@ -643,6 +729,8 @@ namespace MegamanXVileSurvivor
                 SoundAPI.SoundBanks.Add(array);
             }*/
 
+
+
             // and now we gather the assets
             charPortrait = MainAssetBundle.LoadAsset<Sprite>("ExampleSurvivorBody").texture;
 
@@ -651,7 +739,31 @@ namespace MegamanXVileSurvivor
             icon2 = MainAssetBundle.LoadAsset<Sprite>("Skill2Icon");
             icon3 = MainAssetBundle.LoadAsset<Sprite>("Skill3Icon");
             icon4 = MainAssetBundle.LoadAsset<Sprite>("Skill4Icon");
+
+
+            BurningDriveVFX = Assets.LoadEffect("MagicFireBig", "");
+
         }
+
+        private static GameObject LoadEffect(string resourceName, string soundName)
+        {
+            GameObject newEffect = MainAssetBundle.LoadAsset<GameObject>(resourceName);
+
+            newEffect.AddComponent<DestroyOnTimer>().duration = 12;
+            newEffect.AddComponent<NetworkIdentity>();
+            newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
+            var effect = newEffect.AddComponent<EffectComponent>();
+            effect.applyScale = false;
+            effect.effectIndex = EffectIndex.Invalid;
+            effect.parentToReferencedTransform = true;
+            effect.positionAtReferencedTransform = true;
+            effect.soundName = soundName;
+
+            EffectAPI.AddEffect(newEffect);
+
+            return newEffect;
+        }
+
     }
 }
 
@@ -659,7 +771,7 @@ namespace EntityStates.ExampleSurvivorStates
 {
     public class PassiveState : GenericCharacterMain
     {
-        public float Timer;
+        public float Timer = 5f;
         public bool isHeated;
         public float HeatTime = 4f;
         public float baseDuration = 1f;
@@ -679,7 +791,7 @@ namespace EntityStates.ExampleSurvivorStates
             base.FixedUpdate();
             Timer += Time.fixedDeltaTime;
 
-            if (base.inputBank.skill2.justReleased)
+            if (base.inputBank.skill2.justReleased || base.inputBank.skill3.justReleased || base.inputBank.skill4.justReleased)
             {
                 Timer = 0f;
             }
@@ -687,10 +799,23 @@ namespace EntityStates.ExampleSurvivorStates
             if (Timer <= HeatTime)
                 CherryBlast.heat = true;
             else
+            {
                 CherryBlast.heat = false;
+                CherryBlast.buffSkillIndex = 0;
+            }
+
+            if (base.inputBank.skill2.justReleased && (Timer <= HeatTime))
+                CherryBlast.buffSkillIndex = 1;
+
+            if (base.inputBank.skill3.justReleased && (Timer <= HeatTime))
+                CherryBlast.buffSkillIndex = 2;
+
+            if (base.inputBank.skill4.justReleased && (Timer <= HeatTime))
+                CherryBlast.buffSkillIndex = 3;
 
 
-            return ;
+
+            return;
 
         }
 
