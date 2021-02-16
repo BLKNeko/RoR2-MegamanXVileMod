@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 427644674
+CRC: 67447962
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 98ea8a61f49cc293612381e890d11a26
+    Hash: 99035cd2731ef0ca00d6ef18768cfc9d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 03dd90f9ff471b5553f91cd7d4e50849
@@ -40,9 +40,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 67079b849227b734694872d8810229b8, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 24f98ceb39626e542bce4568de94b61d, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: aaabc320440a02340b0239f0cf1745a2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 24f98ceb39626e542bce4568de94b61d, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 135
@@ -60,6 +60,7 @@ ClassTypes:
 - Class: 319
   Script: {instanceID: 0}
 Assets:
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/GranadeL.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/ExampleSurvivorBody.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill4Icon.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/Run.dae
@@ -69,12 +70,14 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/ExampleSurvivorMesh.mesh
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Materials/matExampleSurvivor.mat
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill2Icon.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/GranadeR.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/OLDanimExampleSurvivor.controller
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/Model.dae
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill3Icon.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill1Icon.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/ExampleSurvivorGestureMask.mask
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MMX Idle Pose.fbx
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MaskForAttacksR.mask
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/ch_010_000_Vile.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/texExampleSurvivor.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/IdleeXcella.anim
@@ -82,4 +85,5 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/MagicFireBig.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/CH010_000_U_Vile_Mixamo.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlExampleSurvivor.prefab
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MaskForAttacksL.mask
 Dependencies: []
