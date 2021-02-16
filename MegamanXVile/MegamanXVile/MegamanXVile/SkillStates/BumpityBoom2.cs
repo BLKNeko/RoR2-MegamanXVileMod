@@ -29,8 +29,8 @@ namespace MegamanXVile.SkillStates
             this.fireDuration = 0.25f * this.duration;
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
-            this.muzzleString = "Weapon";
-            this.muzzleString2 = "Weapon";
+            this.muzzleString = "HandL";
+
 
 
             base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);

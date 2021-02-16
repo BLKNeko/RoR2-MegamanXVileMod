@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1184285600
+CRC: 195415917
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8cb73909a6b91fbe2e3db9f97971bf24
+    Hash: e03b32306122d5c59550e22c14346652
   TypeTreeHash:
     serializedVersion: 2
     Hash: 37d7ae37fbed6ed5b9d3b1c92b3cf570
@@ -72,5 +72,6 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/ch_010_000_Vile.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/texExampleSurvivor.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/IdleeXcella.anim
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/CH010_000_U_Vile_Mixamo.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlExampleSurvivor.prefab
 Dependencies: []
