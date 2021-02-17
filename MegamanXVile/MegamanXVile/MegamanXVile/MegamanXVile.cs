@@ -422,6 +422,7 @@ namespace MegamanXVileSurvivor
             LoadoutAPI.AddSkill(typeof(EletricSpark));
             LoadoutAPI.AddSkill(typeof(BumpityBoom));
             LoadoutAPI.AddSkill(typeof(BumpityBoom2));
+            LoadoutAPI.AddSkill(typeof(BurningDrive));
         }
 
         void PassiveSetup()
@@ -544,16 +545,49 @@ namespace MegamanXVileSurvivor
                 viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
             };
 
+            // alternate skill secondary 
+
+            LanguageAPI.Add("VILE_SECONDARY_V_NAME", "FK-Buster");
+            LanguageAPI.Add("VILE_SECONDARY_V_DESCRIPTION", "Shoot with FK-Buster, dealing <style=cIsDamage>125% damage</style>. his charged attack bypass some enemies armor");
+
+            // set up your primary skill def here!
+
+            mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(TestSkill));
+            mySkillDef.activationStateMachineName = "Weapon";
+            mySkillDef.baseMaxStock = 8;
+            mySkillDef.baseRechargeInterval = 5;
+            mySkillDef.beginSkillCooldownOnSkillEnd = false;
+            mySkillDef.canceledFromSprinting = false;
+            mySkillDef.fullRestockOnAssign = true;
+            mySkillDef.interruptPriority = InterruptPriority.Any;
+            mySkillDef.isBullets = false;
+            mySkillDef.isCombatSkill = true;
+            mySkillDef.mustKeyPress = true;
+            mySkillDef.noSprint = true;
+            mySkillDef.rechargeStock = 1;
+            mySkillDef.requiredStock = 1;
+            mySkillDef.shootDelay = 0;
+            mySkillDef.stockToConsume = 1;
+            mySkillDef.icon = Assets.icon4;
+            mySkillDef.skillDescriptionToken = "VILE_SECONDARY_V_DESCRIPTION";
+            mySkillDef.skillName = "VILE_SECONDARY_V_NAME";
+            mySkillDef.skillNameToken = "VILE_SECONDARY_V_NAME";
+
+            LoadoutAPI.AddSkillDef(mySkillDef);
+
 
             // add this code after defining a new skilldef if you're adding an alternate skill
 
-            /*Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+
+
+            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
             skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
             {
-                skillDef = newSkillDef,
+                skillDef = mySkillDef,
                 unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(newSkillDef.skillNameToken, false, null)
-            };*/
+                viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
+            };
         }
 
         void UtilitySetup()
@@ -662,16 +696,47 @@ namespace MegamanXVileSurvivor
                 viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
             };
 
+            // alternate skill Special
+
+            LanguageAPI.Add("VILE_SPECIAL_V_NAME", "blablatest");
+            LanguageAPI.Add("VILE_SPECIAL_V_DESCRIPTION", "Shoot with FK-Buster, dealing <style=cIsDamage>125% damage</style>. his charged attack bypass some enemies armor");
+
+            // set up your primary skill def here!
+
+            mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(TestSkill));
+            mySkillDef.activationStateMachineName = "Weapon";
+            mySkillDef.baseMaxStock = 6;
+            mySkillDef.baseRechargeInterval = 4;
+            mySkillDef.beginSkillCooldownOnSkillEnd = false;
+            mySkillDef.canceledFromSprinting = false;
+            mySkillDef.fullRestockOnAssign = true;
+            mySkillDef.interruptPriority = InterruptPriority.Any;
+            mySkillDef.isBullets = false;
+            mySkillDef.isCombatSkill = true;
+            mySkillDef.mustKeyPress = true;
+            mySkillDef.noSprint = true;
+            mySkillDef.rechargeStock = 1;
+            mySkillDef.requiredStock = 1;
+            mySkillDef.shootDelay = 0;
+            mySkillDef.stockToConsume = 1;
+            mySkillDef.icon = Assets.icon1;
+            mySkillDef.skillDescriptionToken = "VILE_SPECIAL_V_DESCRIPTION";
+            mySkillDef.skillName = "VILE_SPECIAL_V_NAME";
+            mySkillDef.skillNameToken = "VILE_SPECIAL_V_NAME";
+
+            LoadoutAPI.AddSkillDef(mySkillDef);
+
 
             // add this code after defining a new skilldef if you're adding an alternate skill
 
-            /*Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
             skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
             {
-                skillDef = newSkillDef,
+                skillDef = mySkillDef,
                 unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(newSkillDef.skillNameToken, false, null)
-            };*/
+                viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
+            };
         }
 
         private void CreateDoppelganger()
