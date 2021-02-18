@@ -55,7 +55,7 @@ namespace MegamanXVile.SkillStates
 
                 if (base.isAuthority)
                 {
-                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.BumpityBombProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.TestSkill, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
                 }
             }
         }
