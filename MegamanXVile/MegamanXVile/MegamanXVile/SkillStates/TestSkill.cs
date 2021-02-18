@@ -10,7 +10,7 @@ namespace MegamanXVile.SkillStates
 {
     public class TestSkill : BaseSkillState
     {
-        public float damageCoefficient = 2.5f;
+        public float damageCoefficient = 3f;
         public float baseDuration = 0.5f;
         public float recoil = 1f;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerToolbotRebar");
@@ -20,7 +20,6 @@ namespace MegamanXVile.SkillStates
         private bool hasFired;
         private Animator animator;
         private string muzzleString;
-        private string muzzleString2;
 
         public override void OnEnter()
         {
@@ -29,7 +28,7 @@ namespace MegamanXVile.SkillStates
             this.fireDuration = 0.25f * this.duration;
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
-            this.muzzleString = "HandL";
+            this.muzzleString = "Weapon";
 
 
 

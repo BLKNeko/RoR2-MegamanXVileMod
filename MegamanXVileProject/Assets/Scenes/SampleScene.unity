@@ -381,20 +381,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2200497562205624475, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200497562205624475, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4482236228998220408, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00001695007
+      value: 0.000016391277
       objectReference: {fileID: 0}
     - target: {fileID: 4482236228998220408, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5304687
+      value: 2.4331434
       objectReference: {fileID: 0}
     - target: {fileID: 4482236228998220408, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.2355351
+      value: 2.149553
       objectReference: {fileID: 0}
     - target: {fileID: 4482236228998220408, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
         type: 3}
@@ -469,17 +479,17 @@ PrefabInstance:
     - target: {fileID: 4482236228998220762, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000009313226
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4482236228998220762, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 114.476845
+      value: 110.0739
       objectReference: {fileID: 0}
     - target: {fileID: 4482236228998220762, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.160874
+      value: -2.0777633
       objectReference: {fileID: 0}
     - target: {fileID: 4482236228998220762, guid: 8fae7de1aa1928d429c46a4b60d2a1b8,
         type: 3}

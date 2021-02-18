@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "uMsAfYjYxIzzp4ux/G5SbbTysOEHHAIPLuNnw4WC2Ov7j1CWO2cjYumYF73Ct1vfPppF6PagoxdT8kS9VkbO1Q==",
+  "dgSpecHash": "mTADrozIApPcHHOitOkpFKo1lYslypN1CFxNzeFwzAYzlGywYf5shiOvzDWAAgph+CzKuwKKM9cg901MTjJEBQ==",
   "success": true,
-  "projectFilePath": "A:\\Github\\RoR2-MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.csproj",
+  "projectFilePath": "C:\\JOGOS\\Tools\\ROR2 ModdingTools\\MegamanXVileMod\\RoR2-MegamanXVileMod\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\renan\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\renan\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

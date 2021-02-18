@@ -163,6 +163,7 @@ namespace MegamanXVile.SkillStates
                     timer = 0;
                     hasFired = false;
                     base.characterBody.SetAimTimer(1f);
+                    base.PlayAnimation("Attack", "TestShot", "attackSpeed", this.duration);
                     FireArrow();
                 }
             }

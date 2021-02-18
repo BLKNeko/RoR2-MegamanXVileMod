@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 67447962
+CRC: 3346240930
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 99035cd2731ef0ca00d6ef18768cfc9d
+    Hash: 34053a5a5d40a272860b3e7b7c64b3e9
   TypeTreeHash:
     serializedVersion: 2
     Hash: 03dd90f9ff471b5553f91cd7d4e50849
@@ -62,6 +62,7 @@ ClassTypes:
 Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/GranadeL.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/ExampleSurvivorBody.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/TestShoot.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill4Icon.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/Run.dae
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlVile.prefab
@@ -71,6 +72,7 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Materials/matExampleSurvivor.mat
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill2Icon.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/GranadeR.anim
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/LogIn.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/OLDanimExampleSurvivor.controller
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/Model.dae
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill3Icon.png
@@ -82,7 +84,10 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/texExampleSurvivor.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/IdleeXcella.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/Vile Mk2 Texture.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/CH010_000_U_Vile@Run To
+  Stop.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/MagicFireBig.prefab
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/Run to Stop.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/CH010_000_U_Vile_Mixamo.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlExampleSurvivor.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MaskForAttacksL.mask
