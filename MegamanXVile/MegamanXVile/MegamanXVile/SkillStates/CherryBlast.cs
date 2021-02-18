@@ -155,10 +155,10 @@ namespace MegamanXVile.SkillStates
             {
                 if (timer > shootdelay)
                 {
-                    if (shootdelay <= 0.06f)
-                        shootdelay = 0.06f;
+                    if (shootdelay <= 0.075f)
+                        shootdelay = 0.075f;
                     else
-                        shootdelay -= (0.15f + (base.attackSpeedStat / 50));
+                        shootdelay -= (0.145f + (base.attackSpeedStat / 50));
 
                     timer = 0;
                     hasFired = false;

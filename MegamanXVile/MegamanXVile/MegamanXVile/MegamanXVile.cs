@@ -704,7 +704,7 @@ namespace MegamanXVileSurvivor
             // set up your primary skill def here!
 
             mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
-            mySkillDef.activationState = new SerializableEntityStateType(typeof(TestSkill));
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(TestSkill2));
             mySkillDef.activationStateMachineName = "Weapon";
             mySkillDef.baseMaxStock = 6;
             mySkillDef.baseRechargeInterval = 4;
@@ -838,7 +838,7 @@ namespace EntityStates.ExampleSurvivorStates
     {
         public float Timer = 5f;
         public bool isHeated;
-        public float HeatTime = 4f;
+        public float HeatTime = 5f;
         public float baseDuration = 1f;
         private float duration;
         private Animator animator;
