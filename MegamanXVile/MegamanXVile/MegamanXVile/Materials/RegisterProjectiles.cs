@@ -13,6 +13,7 @@ namespace MegamanXVile.Materials
         public static GameObject EletricSpark;
         public static GameObject BumpityBombProjectile;
         public static GameObject TestSkill;
+        public static GameObject TestSkill2;
 
 
 
@@ -76,6 +77,22 @@ namespace MegamanXVile.Materials
 
             //--------------------------------------END --------------------------------------------
 
+            //-------------------------------------START --------------------------------------------
+
+            //CommandoGrenadeProjectile (boa, quica uma vez e explode  depois de um tempo)
+            //CryoCanisterBombletsProjectile (boa, ele apenas solta a granada no chão)
+            TestSkill2 = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/FMJ"), "Prefabs/Projectiles/BombProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            TestSkill2.GetComponent<ProjectileController>().procCoefficient = 1f;
+            TestSkill2.GetComponent<ProjectileDamage>().damage = 1f;
+            TestSkill2.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+
+            // register it for networking
+            if (TestSkill2) PrefabAPI.RegisterNetworkPrefab(TestSkill2);
+
+            //--------------------------------------END --------------------------------------------
+
             // add it to the projectile catalog or it won't work in multiplayer
             ProjectileCatalog.getAdditionalEntries += list =>
             {
@@ -83,6 +100,7 @@ namespace MegamanXVile.Materials
                 list.Add(EletricSpark);
                 list.Add(BumpityBombProjectile);
                 list.Add(TestSkill);
+                list.Add(TestSkill2);
             };
         }
 

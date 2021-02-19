@@ -29,7 +29,7 @@ namespace MegamanXVile.SkillStates
             this.muzzleString = "Weapon";
 
 
-            base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);
+            base.PlayAnimation("Attack", "TestShot", "attackSpeed", this.duration);
         }
 
         public override void OnExit()

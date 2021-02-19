@@ -45,7 +45,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 5}
-  m_MinSize: {x: 950, y: 398}
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &3
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_MinSize: {x: 1, y: 26}
   m_MaxSize: {x: 1, y: 26}
   vertical: 0
-  controlID: 98
+  controlID: 41
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -120,7 +120,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 398}
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &6
 MonoBehaviour:
@@ -186,10 +186,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 348}
-  m_MaxSize: {x: 12008, y: 8048}
+  m_MinSize: {x: 683, y: 498}
+  m_MaxSize: {x: 14004, y: 14048}
   vertical: 0
-  controlID: 105
+  controlID: 48
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -211,10 +211,10 @@ MonoBehaviour:
     y: 0
     width: 1428
     height: 947
-  m_MinSize: {x: 406, y: 348}
-  m_MaxSize: {x: 8006, y: 8048}
+  m_MinSize: {x: 406, y: 498}
+  m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 106
+  controlID: 49
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 107
+  controlID: 50
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -314,15 +314,15 @@ MonoBehaviour:
     y: 562
     width: 1428
     height: 385
-  m_MinSize: {x: 102, y: 124}
-  m_MaxSize: {x: 4002, y: 4024}
-  m_ActualView: {fileID: 24}
+  m_MinSize: {x: 232, y: 274}
+  m_MaxSize: {x: 10002, y: 10024}
+  m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
   - {fileID: 23}
   - {fileID: 24}
-  m_Selected: 2
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 2
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -609,8 +609,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: c2fbffff
-      m_LastClickedID: -1086
+      m_SelectedIDs: a0320000
+      m_LastClickedID: 0
       m_ExpandedIDs: c4fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -778,20 +778,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations
+    - Assets/ExampleSurvivor/ExampleSurvivorAssets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations
+  - Assets/ExampleSurvivor/ExampleSurvivorAssets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\JOGOS\Tools\ROR2 ModdingTools\MegamanXVileMod\RoR2-MegamanXVileMod\MegamanXVileProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: c4100000
-    m_LastClickedID: 4292
-    m_ExpandedIDs: 00000000060b0000600b0000740c00000e0f00001e0f00002e0f0000f00f0000f60f00003c100000ee310000f0310000f2310000f4310000f6310000f8310000fa310000fc310000fe31000000320000023200000432000006320000083200000a3200000c3200000e32000010320000123200001432000016320000183200001a3200001c3200001e32000020320000223200002432000026320000283200002a3200002c3200002e320000303200003232000000ca9a3b
+    m_SelectedIDs: 340f0000
+    m_LastClickedID: 3892
+    m_ExpandedIDs: 00000000060b0000620b0000780c0000140f0000240f0000340f00003210000038100000801000003a3200003c3200003e32000040320000423200004432000046320000483200004a3200004c3200004e32000050320000523200005432000056320000583200005a3200005c3200005e32000060320000623200006432000066320000683200006a3200006c3200006e32000070320000723200007432000076320000783200007a3200007c3200007e32000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -819,7 +819,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000060b0000600b0000740c00000e0f00001e0f00002e0f0000f00f0000f60f00003c100000ee310000f0310000f2310000f4310000f6310000f8310000fa310000fc310000fe31000000320000023200000432000006320000083200000a3200000c3200000e32000010320000123200001432000016320000183200001a3200001c3200001e32000020320000223200002432000026320000283200002a3200002c3200002e3200003032000032320000
+    m_ExpandedIDs: 00000000060b0000620b0000780c0000140f0000240f0000340f00003210000038100000801000003a3200003c3200003e32000040320000423200004432000046320000483200004a3200004c3200004e32000050320000523200005432000056320000583200005a3200005c3200005e32000060320000623200006432000066320000683200006a3200006c3200006e32000070320000723200007432000076320000783200007a3200007c3200007e320000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -844,8 +844,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: c2fbffff
-    m_LastClickedInstanceID: -1086
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300004c3200002e28000040280000522f000050280000a827000046310000aa2f00009e2f000056280000c4280000a62b000036300000cc280000f84a000090460000983e0000c272000034290000f02a00007e2900003a2b0000fa2b0000fc2b00002c2c00000c2c0000f2260000b20a000060320000
     m_RenameOverlay:

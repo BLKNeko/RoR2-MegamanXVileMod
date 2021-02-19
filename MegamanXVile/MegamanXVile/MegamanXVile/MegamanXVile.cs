@@ -312,7 +312,7 @@ namespace MegamanXVileSurvivor
             GroundBox.transform.parent = childLocator.FindChild("GroundBox");
             GroundBox.transform.localPosition = new Vector3(0f, 0f, 0f);
             GroundBox.transform.localRotation = Quaternion.identity;
-            GroundBox.transform.localScale = new Vector3(800f, 800f, 800f);
+            GroundBox.transform.localScale = new Vector3(950f, 950f, 950f);
 
             HitBox hitBox = GroundBox.AddComponent<HitBox>();
             GroundBox.layer = LayerIndex.projectile.intVal;
@@ -510,8 +510,8 @@ namespace MegamanXVileSurvivor
             SkillDef mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
             mySkillDef.activationState = new SerializableEntityStateType(typeof(BumpityBoom));
             mySkillDef.activationStateMachineName = "Weapon";
-            mySkillDef.baseMaxStock = 2;
-            mySkillDef.baseRechargeInterval = 8f;
+            mySkillDef.baseMaxStock = 3;
+            mySkillDef.baseRechargeInterval = 7f;
             mySkillDef.beginSkillCooldownOnSkillEnd = false;
             mySkillDef.canceledFromSprinting = false;
             mySkillDef.fullRestockOnAssign = true;
@@ -547,16 +547,16 @@ namespace MegamanXVileSurvivor
 
             // alternate skill secondary 
 
-            LanguageAPI.Add("VILE_SECONDARY_V_NAME", "FK-Buster");
-            LanguageAPI.Add("VILE_SECONDARY_V_DESCRIPTION", "Shoot with FK-Buster, dealing <style=cIsDamage>125% damage</style>. his charged attack bypass some enemies armor");
+            LanguageAPI.Add("VILE_SECONDARY_V_NAME", "Humerus Crush");
+            LanguageAPI.Add("VILE_SECONDARY_V_DESCRIPTION", "Shoot a fire missle that explodes on impact, dealing <style=cIsDamage>300% damage</style>.");
 
             // set up your primary skill def here!
 
             mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
-            mySkillDef.activationState = new SerializableEntityStateType(typeof(TestSkill));
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(HumerusCrush));
             mySkillDef.activationStateMachineName = "Weapon";
-            mySkillDef.baseMaxStock = 8;
-            mySkillDef.baseRechargeInterval = 5;
+            mySkillDef.baseMaxStock = 5;
+            mySkillDef.baseRechargeInterval = 7;
             mySkillDef.beginSkillCooldownOnSkillEnd = false;
             mySkillDef.canceledFromSprinting = false;
             mySkillDef.fullRestockOnAssign = true;
@@ -594,7 +594,7 @@ namespace MegamanXVileSurvivor
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
 
-            LanguageAPI.Add("VILE_UTILITY_NAME", "EletricSpark");
+            LanguageAPI.Add("VILE_UTILITY_NAME", "Electric Shock Round");
             LanguageAPI.Add("VILE_UTILITY_DESCRIPTION", "Fire an eletric bomb, dealing <style=cIsDamage>1000% damage</style> and paralize enemies for 5s.");
 
             // set up your primary skill def here!
@@ -662,7 +662,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.activationState = new SerializableEntityStateType(typeof(BurningDrive));
             mySkillDef.activationStateMachineName = "Weapon";
             mySkillDef.baseMaxStock = 1;
-            mySkillDef.baseRechargeInterval = 0f;
+            mySkillDef.baseRechargeInterval = 8f;
             mySkillDef.beginSkillCooldownOnSkillEnd = false;
             mySkillDef.canceledFromSprinting = false;
             mySkillDef.fullRestockOnAssign = true;
@@ -698,16 +698,16 @@ namespace MegamanXVileSurvivor
 
             // alternate skill Special
 
-            LanguageAPI.Add("VILE_SPECIAL_V_NAME", "blablatest");
-            LanguageAPI.Add("VILE_SPECIAL_V_DESCRIPTION", "Shoot with FK-Buster, dealing <style=cIsDamage>125% damage</style>. his charged attack bypass some enemies armor");
+            LanguageAPI.Add("VILE_SPECIAL_V_NAME", "Cerberus Phantom");
+            LanguageAPI.Add("VILE_SPECIAL_V_DESCRIPTION", "Shoot a spread of 3 lasers, dealing <style=cIsDamage>250% damage</style>.");
 
             // set up your primary skill def here!
 
             mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
-            mySkillDef.activationState = new SerializableEntityStateType(typeof(TestSkill2));
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(CerberusPhantom));
             mySkillDef.activationStateMachineName = "Weapon";
-            mySkillDef.baseMaxStock = 6;
-            mySkillDef.baseRechargeInterval = 4;
+            mySkillDef.baseMaxStock = 2;
+            mySkillDef.baseRechargeInterval = 8;
             mySkillDef.beginSkillCooldownOnSkillEnd = false;
             mySkillDef.canceledFromSprinting = false;
             mySkillDef.fullRestockOnAssign = true;

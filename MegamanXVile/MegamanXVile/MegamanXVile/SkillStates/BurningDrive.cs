@@ -13,7 +13,7 @@ namespace MegamanXVile.SkillStates
 {
     class BurningDrive : BaseSkillState
     {
-        public static float damageCoefficient = 6f;
+        public static float damageCoefficient = 8f;
         public static float buffDamageCoefficient = 1f;
         public float baseDuration = 0.8f;
         public static float attackRecoil = 0.5f;
