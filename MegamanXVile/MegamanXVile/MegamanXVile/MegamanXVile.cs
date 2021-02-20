@@ -40,6 +40,8 @@ namespace MegamanXVileSurvivor
 
         //public static GameObject arrowProjectile; // prefab for our survivor's primary attack projectile
         //public static GameObject EletricSpark;
+        
+
 
         private static readonly Color characterColor = new Color(0.55f, 0.55f, 0.55f); // color used for the survivor
 
@@ -53,6 +55,7 @@ namespace MegamanXVileSurvivor
             RegisterStates(); // register our skill entitystates for networking
             RegisterCharacter(); // and finally put our new survivor in the game
             CreateDoppelganger(); // not really mandatory, but it's simple and not having an umbra is just kinda lame
+            Skins.RegisterSkins();
         }
 
         private static GameObject CreateModel(GameObject main)
@@ -142,6 +145,7 @@ namespace MegamanXVileSurvivor
             bodyComponent.sprintingSpeedMultiplier = 1.4f;
             bodyComponent.wasLucky = false;
             bodyComponent.hideCrosshair = false;
+            bodyComponent.crosshairPrefab = Resources.Load<GameObject>("Prefabs/Crosshair/SMGCrosshair");
             bodyComponent.aimOriginTransform = gameObject3.transform;
             bodyComponent.hullClassification = HullClassification.Human;
             bodyComponent.portraitIcon = Assets.charPortrait;
@@ -206,6 +210,9 @@ namespace MegamanXVileSurvivor
             characterModel.autoPopulateLightInfos = true;
             characterModel.invisibilityCount = 0;
             characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+
+            characterModel.mainSkinnedMeshRenderer = characterModel.baseRendererInfos[0].renderer.GetComponent<SkinnedMeshRenderer>();
+
 
             TeamComponent teamComponent = null;
             if (characterPrefab.GetComponent<TeamComponent>() != null) teamComponent = characterPrefab.GetComponent<TeamComponent>();
@@ -465,7 +472,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.requiredStock = 1;
             mySkillDef.shootDelay = 0f;
             mySkillDef.stockToConsume = 1;
-            mySkillDef.icon = Assets.icon1;
+            mySkillDef.icon = Assets.iconCB;
             mySkillDef.skillDescriptionToken = "VILE_PRIMARY_DESCRIPTION";
             mySkillDef.skillName = "VILE_PRIMARY_NAME";
             mySkillDef.skillNameToken = "VILE_PRIMARY_NAME";
@@ -524,7 +531,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.requiredStock = 1;
             mySkillDef.shootDelay = 0f;
             mySkillDef.stockToConsume = 1;
-            mySkillDef.icon = Assets.icon2;
+            mySkillDef.icon = Assets.iconBB;
             mySkillDef.skillDescriptionToken = "VILE_SECONDARY_DESCRIPTION";
             mySkillDef.skillName = "VILE_SECONDARY_NAME";
             mySkillDef.skillNameToken = "VILE_SECONDARY_NAME";
@@ -569,7 +576,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.requiredStock = 1;
             mySkillDef.shootDelay = 0;
             mySkillDef.stockToConsume = 1;
-            mySkillDef.icon = Assets.icon4;
+            mySkillDef.icon = Assets.iconBD;
             mySkillDef.skillDescriptionToken = "VILE_SECONDARY_V_DESCRIPTION";
             mySkillDef.skillName = "VILE_SECONDARY_V_NAME";
             mySkillDef.skillNameToken = "VILE_SECONDARY_V_NAME";
@@ -616,7 +623,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.requiredStock = 1;
             mySkillDef.shootDelay = 0f;
             mySkillDef.stockToConsume = 1;
-            mySkillDef.icon = Assets.icon3;
+            mySkillDef.icon = Assets.iconES;
             mySkillDef.skillDescriptionToken = "VILE_UTILITY_DESCRIPTION";
             mySkillDef.skillName = "VILE_UTILITY_NAME";
             mySkillDef.skillNameToken = "VILE_UTILITY_NAME";
@@ -675,7 +682,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.requiredStock = 1;
             mySkillDef.shootDelay = 0f;
             mySkillDef.stockToConsume = 1;
-            mySkillDef.icon = Assets.icon4;
+            mySkillDef.icon = Assets.iconBD;
             mySkillDef.skillDescriptionToken = "VILE_SPECIAL_DESCRIPTION";
             mySkillDef.skillName = "VILE_SPECIAL_NAME";
             mySkillDef.skillNameToken = "VILE_SPECIAL_NAME";
@@ -720,7 +727,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.requiredStock = 1;
             mySkillDef.shootDelay = 0;
             mySkillDef.stockToConsume = 1;
-            mySkillDef.icon = Assets.icon1;
+            mySkillDef.icon = Assets.iconCB;
             mySkillDef.skillDescriptionToken = "VILE_SPECIAL_V_DESCRIPTION";
             mySkillDef.skillName = "VILE_SPECIAL_V_NAME";
             mySkillDef.skillNameToken = "VILE_SPECIAL_V_NAME";
@@ -770,10 +777,10 @@ namespace MegamanXVileSurvivor
         public static GameObject BurningDriveVFX;
 
         public static Sprite iconP;
-        public static Sprite icon1;
-        public static Sprite icon2;
-        public static Sprite icon3;
-        public static Sprite icon4;
+        public static Sprite iconCB;
+        public static Sprite iconBB;
+        public static Sprite iconES;
+        public static Sprite iconBD;
 
         public static void PopulateAssets()
         {
@@ -797,13 +804,13 @@ namespace MegamanXVileSurvivor
 
 
             // and now we gather the assets
-            charPortrait = MainAssetBundle.LoadAsset<Sprite>("ExampleSurvivorBody").texture;
+            charPortrait = MainAssetBundle.LoadAsset<Sprite>("Vile_Icon").texture;
 
             iconP = MainAssetBundle.LoadAsset<Sprite>("PassiveIcon");
-            icon1 = MainAssetBundle.LoadAsset<Sprite>("Skill1Icon");
-            icon2 = MainAssetBundle.LoadAsset<Sprite>("Skill2Icon");
-            icon3 = MainAssetBundle.LoadAsset<Sprite>("Skill3Icon");
-            icon4 = MainAssetBundle.LoadAsset<Sprite>("Skill4Icon");
+            iconCB = MainAssetBundle.LoadAsset<Sprite>("SkillIconCB");
+            iconBB = MainAssetBundle.LoadAsset<Sprite>("SkillIconBB");
+            iconES = MainAssetBundle.LoadAsset<Sprite>("SkillIconES");
+            iconBD = MainAssetBundle.LoadAsset<Sprite>("SkillIconBD");
 
 
             BurningDriveVFX = Assets.LoadEffect("MagicFireBig", "");

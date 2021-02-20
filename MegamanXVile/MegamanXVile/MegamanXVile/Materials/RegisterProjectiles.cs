@@ -14,6 +14,7 @@ namespace MegamanXVile.Materials
         public static GameObject BumpityBombProjectile;
         public static GameObject TestSkill;
         public static GameObject TestSkill2;
+        public static GameObject ShotgunIceProjectile;
 
 
 
@@ -93,6 +94,22 @@ namespace MegamanXVile.Materials
 
             //--------------------------------------END --------------------------------------------
 
+            //-------------------------------------START --------------------------------------------
+
+            //CommandoGrenadeProjectile (boa, quica uma vez e explode  depois de um tempo)
+            //CryoCanisterBombletsProjectile (boa, ele apenas solta a granada no chão)
+            ShotgunIceProjectile = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/MageIceBombProjectile"), "Prefabs/Projectiles/BombProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
+
+            // just setting the numbers to 1 as the entitystate will take care of those
+            ShotgunIceProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            ShotgunIceProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            ShotgunIceProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Freeze2s;
+
+            // register it for networking
+            if (ShotgunIceProjectile) PrefabAPI.RegisterNetworkPrefab(ShotgunIceProjectile);
+
+            //--------------------------------------END --------------------------------------------
+
             // add it to the projectile catalog or it won't work in multiplayer
             ProjectileCatalog.getAdditionalEntries += list =>
             {
@@ -101,6 +118,7 @@ namespace MegamanXVile.Materials
                 list.Add(BumpityBombProjectile);
                 list.Add(TestSkill);
                 list.Add(TestSkill2);
+                list.Add(ShotgunIceProjectile);
             };
         }
 

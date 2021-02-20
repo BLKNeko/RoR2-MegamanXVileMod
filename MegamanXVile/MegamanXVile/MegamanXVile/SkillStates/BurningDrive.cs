@@ -61,6 +61,9 @@ namespace MegamanXVile.SkillStates
             EffectManager.SimpleMuzzleFlash(MegamanXVileSurvivor.Assets.BurningDriveVFX, base.gameObject, "GroundBox", true);
             EffectManager.SimpleMuzzleFlash(MegamanXVileSurvivor.Assets.BurningDriveVFX, base.gameObject, "GroundBox", true);
             EffectManager.SimpleMuzzleFlash(MegamanXVileSurvivor.Assets.BurningDriveVFX, base.gameObject, "GroundBox", true);
+            EffectManager.SimpleMuzzleFlash(MegamanXVileSurvivor.Assets.BurningDriveVFX, base.gameObject, "GroundBox", true);
+            EffectManager.SimpleMuzzleFlash(MegamanXVileSurvivor.Assets.BurningDriveVFX, base.gameObject, "GroundBox", true);
+
 
 
             float dmg = BurningDrive.damageCoefficient;

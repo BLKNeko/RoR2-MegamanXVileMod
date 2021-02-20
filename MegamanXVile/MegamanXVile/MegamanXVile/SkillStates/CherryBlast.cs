@@ -43,8 +43,9 @@ namespace MegamanXVile.SkillStates
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
             this.muzzleString = "Weapon";
+            base.characterBody.isSprinting = false;
 
-            
+
             if (heat)
                 shootdelay = 0.86f;
             else
@@ -64,8 +65,8 @@ namespace MegamanXVile.SkillStates
             if (!this.hasFired)
             {
                 this.hasFired = true;
-
-                base.characterBody.AddSpreadBloom(0.6f);
+               
+                base.characterBody.SetSpreadBloom(0.8f);
                 Ray aimRay = base.GetAimRay();
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
 
@@ -103,12 +104,12 @@ namespace MegamanXVile.SkillStates
                     BT.weapon = base.gameObject;
                     BT.origin = aimRay.origin;
                     BT.aimVector = aimRay.direction;
-                    BT.minSpread = 0.1f;
-                    BT.maxSpread = 0.6f;
+                    BT.minSpread = 0.3f;
+                    BT.maxSpread = 0.8f;
                     BT.damage = damageCoefficient * this.damageStat;
                     BT.procChainMask = default(ProcChainMask);
                     BT.force = 45f;
-                    BT.radius = 0.4f;
+                    BT.radius = 0.3f;
                     BT.sniper = true;
                     BT.spreadPitchScale = 0.5f;
                     BT.spreadYawScale = 0.5f;
@@ -164,6 +165,7 @@ namespace MegamanXVile.SkillStates
                     hasFired = false;
                     base.characterBody.SetAimTimer(1f);
                     base.PlayAnimation("Attack", "TestShot", "attackSpeed", this.duration);
+                    base.characterBody.isSprinting = false;
                     FireArrow();
                 }
             }
