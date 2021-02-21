@@ -28,7 +28,7 @@ namespace MegamanXVile.SkillStates
             this.animator = base.GetModelAnimator();
             this.muzzleString = "Weapon";
 
-
+            Util.PlaySound(Sounds.vileAttack, base.gameObject);
             base.PlayAnimation("Attack", "TestShot", "attackSpeed", this.duration);
         }
 
@@ -43,7 +43,7 @@ namespace MegamanXVile.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.15f);
+                base.characterBody.SetSpreadBloom(0.8f);
                 Ray aimRay = base.GetAimRay();
                 //EffectManager.SimpleMuzzleFlash(Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireLaserbolt.impactEffectPrefab, base.gameObject, this.muzzleString, false);

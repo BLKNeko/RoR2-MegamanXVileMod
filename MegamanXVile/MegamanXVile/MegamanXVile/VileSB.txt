@@ -1,0 +1,24 @@
+Event	ID	Name			Wwise Object Path	Notes
+	391060793	Call_Vile_Die			\Default Work Unit\Call_Vile_Die	
+	1254201957	Call_Vile_Cherry_Blast			\Default Work Unit\Call_Vile_Cherry_Blast	
+	1980601836	Call_Vile_Passive			\Default Work Unit\Call_Vile_Passive	
+	2835797633	Call_Vile_Attack			\Default Work Unit\Call_Vile_Attack	
+	4222264822	Call_Vile_Cerberus_Phantom			\Default Work Unit\Call_Vile_Cerberus_Phantom	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3673881719	Volume_SFX			\Default Work Unit\Volume_SFX	
+	3695994288	Volume_Master			\Default Work Unit\Volume_Master	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	77091174	Vile_IShowYouHowStrongIAm	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_IShowYouHowStrongIAm_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Passive\Vile_IShowYouHowStrongIAm		9701
+	119115240	Vile_haaaa	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_haaaa_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Attack\Vile_haaaa		5604
+	210434215	Vile_EatThis	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_EatThis_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Attack\Vile_EatThis		4324
+	427932962	Vile_HeyNotBad	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_HeyNotBad_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Passive\Vile_HeyNotBad		8099
+	539835244	Vile_Die	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_Die_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Die		12478
+	728803373	Vile_INotDoneYet	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_INotDoneYet_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Passive\Vile_INotDoneYet		8556
+	928393689	Vile_TakeThis	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_TakeThis_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Attack\Vile_TakeThis		4886
+	952911562	Vile_Haa	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_Haa_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Attack\Vile_Haa		3232
+	1058223266	Vile_CerberusPhantom	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_CerberusPhantom_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_CerberusPhantom		3429
+	1058733777	Vile_Here	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_Here_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Attack\Vile_Here		3229
+	1068992085	Vile_Cherry_Blast	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_Cherry_Blast_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Cherry_Blast		2905
+

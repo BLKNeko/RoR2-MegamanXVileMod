@@ -19,6 +19,7 @@ namespace MegamanXVile.SkillStates
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerClayBruiserMinigun");
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/Hitspark1");
         public int bulletcount;
+        public bool shootsfx = true;
 
         public static bool heat;
         public static int buffSkillIndex;
@@ -51,8 +52,6 @@ namespace MegamanXVile.SkillStates
             else
                 shootdelay -= (base.attackSpeedStat / 10);
 
-
-            base.PlayAnimation("Gesture, Override", "FireArrow", "FireArrow.playbackRate", this.duration);
         }
 
         public override void OnExit()
@@ -119,7 +118,7 @@ namespace MegamanXVile.SkillStates
                     BT.muzzleName = muzzleString;
                     BT.hitEffectPrefab = hitEffectPrefab;
                     BT.queryTriggerInteraction = QueryTriggerInteraction.UseGlobal;
-                    BT.isCrit = Util.CheckRoll(base.critStat, base.characterBody.master);
+                    BT.isCrit = PassiveState.isCrit;
 
                     switch(buffSkillIndex)
                     {
@@ -141,6 +140,10 @@ namespace MegamanXVile.SkillStates
 
                     }
 
+                    if(shootsfx)
+                    Util.PlaySound(Sounds.vileCherryBlast, base.gameObject);
+
+
                     BT.Fire();
                 }
             }
@@ -157,7 +160,13 @@ namespace MegamanXVile.SkillStates
                 if (timer > shootdelay)
                 {
                     if (shootdelay <= 0.075f)
+                    {
                         shootdelay = 0.075f;
+                        if (shootsfx)
+                            shootsfx = false;
+                        else
+                            shootsfx = true;
+                    }
                     else
                         shootdelay -= (0.145f + (base.attackSpeedStat / 50));
 

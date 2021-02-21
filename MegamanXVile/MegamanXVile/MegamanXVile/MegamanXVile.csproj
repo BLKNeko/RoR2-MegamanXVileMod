@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <None Remove="megamanxvilebundle" />
+    <None Remove="VileSB.bnk" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="megamanxvilebundle" />
+    <EmbeddedResource Include="VileSB.bnk" />
   </ItemGroup>
 
   <ItemGroup>

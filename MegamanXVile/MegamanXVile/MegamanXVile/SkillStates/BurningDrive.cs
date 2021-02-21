@@ -46,6 +46,8 @@ namespace MegamanXVile.SkillStates
             base.StartAimMode(0.5f + this.duration, false);
             //base.characterBody.isSprinting = false;
 
+            Util.PlaySound(Sounds.vileAttack, base.gameObject);
+
             HitBoxGroup hitBoxGroup = null;
             Transform modelTransform = base.GetModelTransform();
 

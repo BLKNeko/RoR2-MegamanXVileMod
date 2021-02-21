@@ -31,7 +31,7 @@ namespace MegamanXVile.SkillStates
             this.muzzleString = "Weapon";
 
 
-
+            Util.PlaySound(Sounds.vileAttack, base.gameObject);
             base.PlayAnimation("Attack", "TestShot", "attackSpeed", this.duration);
         }
 
@@ -47,7 +47,7 @@ namespace MegamanXVile.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.15f);
+                base.characterBody.SetSpreadBloom(0.8f);
                 Ray aimRay = base.GetAimRay();
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
                 float spread_value = ((aimRay.direction.x) - (aimRay.direction.x * 3f));
@@ -58,10 +58,10 @@ namespace MegamanXVile.SkillStates
 
                 if (base.isAuthority)
                 {
-
-                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.TestSkill2, aimRay.origin, Util.QuaternionSafeLookRotation(raygun1.normalized), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
-                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.TestSkill2, aimRay.origin, Util.QuaternionSafeLookRotation(raygun2.normalized), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
-                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.TestSkill2, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    Util.PlaySound(Sounds.vileCerberusPhantom, base.gameObject);
+                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.CerberusPhantonFMJProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(raygun1.normalized), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.CerberusPhantonFMJProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(raygun2.normalized), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.CerberusPhantonFMJProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
 
 
                 }

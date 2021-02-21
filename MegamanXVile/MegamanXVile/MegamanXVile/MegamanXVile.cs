@@ -16,7 +16,7 @@ using System.Security.Permissions;
 using MegamanXVile.SkillStates;
 using MegamanXVile.Materials;
 using EntityStates.ExampleSurvivorStates;
-
+using System.IO;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -43,7 +43,7 @@ namespace MegamanXVileSurvivor
         
 
 
-        private static readonly Color characterColor = new Color(0.55f, 0.55f, 0.55f); // color used for the survivor
+        private static readonly Color characterColor = new Color(0.35f, 0.05f, 0.4f); // color used for the survivor
 
         private void Awake()
         {
@@ -127,7 +127,7 @@ namespace MegamanXVileSurvivor
             bodyComponent.baseRegen = 0.4f;
             bodyComponent.levelRegen = 0.28f;
             bodyComponent.baseMaxShield = 0;
-            bodyComponent.levelMaxShield = 0.4f;
+            bodyComponent.levelMaxShield = 0.5f;
             bodyComponent.baseMoveSpeed = 6f;
             bodyComponent.levelMoveSpeed = 0.1f;
             bodyComponent.baseAcceleration = 75;
@@ -140,7 +140,7 @@ namespace MegamanXVileSurvivor
             bodyComponent.baseCrit = 1;
             bodyComponent.levelCrit = 0.25f;
             bodyComponent.baseArmor = 1;
-            bodyComponent.levelArmor = 0.6f;
+            bodyComponent.levelArmor = 1f;
             bodyComponent.baseJumpCount = 1;
             bodyComponent.sprintingSpeedMultiplier = 1.4f;
             bodyComponent.wasLucky = false;
@@ -239,7 +239,7 @@ namespace MegamanXVileSurvivor
 
             // edit the sfxlocator if you want different sounds
             SfxLocator sfxLocator = characterPrefab.GetComponent<SfxLocator>();
-            sfxLocator.deathSound = "Play_ui_player_death";
+            sfxLocator.deathSound = Sounds.vileDie;
             sfxLocator.barkSound = "";
             sfxLocator.openSound = "";
             sfxLocator.landingSound = "Play_char_land";
@@ -430,6 +430,9 @@ namespace MegamanXVileSurvivor
             LoadoutAPI.AddSkill(typeof(BumpityBoom));
             LoadoutAPI.AddSkill(typeof(BumpityBoom2));
             LoadoutAPI.AddSkill(typeof(BurningDrive));
+            LoadoutAPI.AddSkill(typeof(FrontRunner));
+            LoadoutAPI.AddSkill(typeof(CerberusPhantom));
+            LoadoutAPI.AddSkill(typeof(ShotgunIce));
         }
 
         void PassiveSetup()
@@ -554,13 +557,13 @@ namespace MegamanXVileSurvivor
 
             // alternate skill secondary 
 
-            LanguageAPI.Add("VILE_SECONDARY_V_NAME", "Humerus Crush");
-            LanguageAPI.Add("VILE_SECONDARY_V_DESCRIPTION", "Shoot a fire missle that explodes on impact, dealing <style=cIsDamage>300% damage</style>.");
+            LanguageAPI.Add("VILE_SECONDARY_V_NAME", "Front Runner");
+            LanguageAPI.Add("VILE_SECONDARY_V_DESCRIPTION", "A cannon shot that explodes on impact, dealing <style=cIsDamage>300% damage</style>.");
 
             // set up your primary skill def here!
 
             mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
-            mySkillDef.activationState = new SerializableEntityStateType(typeof(HumerusCrush));
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(FrontRunner));
             mySkillDef.activationStateMachineName = "Weapon";
             mySkillDef.baseMaxStock = 5;
             mySkillDef.baseRechargeInterval = 7;
@@ -576,7 +579,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.requiredStock = 1;
             mySkillDef.shootDelay = 0;
             mySkillDef.stockToConsume = 1;
-            mySkillDef.icon = Assets.iconBD;
+            mySkillDef.icon = Assets.iconFR;
             mySkillDef.skillDescriptionToken = "VILE_SECONDARY_V_DESCRIPTION";
             mySkillDef.skillName = "VILE_SECONDARY_V_NAME";
             mySkillDef.skillNameToken = "VILE_SECONDARY_V_NAME";
@@ -644,24 +647,55 @@ namespace MegamanXVileSurvivor
                 viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
             };
 
+            // alternate skill Special
+
+            LanguageAPI.Add("VILE_UTILITY_V_NAME", "Shotgun Ice");
+            LanguageAPI.Add("VILE_UTILITY_V_DESCRIPTION", "A powerful ice shot that cause <style=cIsDamage>400% damage</style> and freezing the enemies.");
+
+            // set up your primary skill def here!
+
+            mySkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            mySkillDef.activationState = new SerializableEntityStateType(typeof(ShotgunIce));
+            mySkillDef.activationStateMachineName = "Weapon";
+            mySkillDef.baseMaxStock = 2;
+            mySkillDef.baseRechargeInterval = 8.5f;
+            mySkillDef.beginSkillCooldownOnSkillEnd = false;
+            mySkillDef.canceledFromSprinting = false;
+            mySkillDef.fullRestockOnAssign = true;
+            mySkillDef.interruptPriority = InterruptPriority.Any;
+            mySkillDef.isBullets = false;
+            mySkillDef.isCombatSkill = true;
+            mySkillDef.mustKeyPress = true;
+            mySkillDef.noSprint = true;
+            mySkillDef.rechargeStock = 1;
+            mySkillDef.requiredStock = 1;
+            mySkillDef.shootDelay = 0;
+            mySkillDef.stockToConsume = 1;
+            mySkillDef.icon = Assets.iconSI;
+            mySkillDef.skillDescriptionToken = "VILE_UTILITY_V_DESCRIPTION";
+            mySkillDef.skillName = "VILE_UTILITY_V_NAME";
+            mySkillDef.skillNameToken = "VILE_UTILITY_V_NAME";
+
+            LoadoutAPI.AddSkillDef(mySkillDef);
+
 
             // add this code after defining a new skilldef if you're adding an alternate skill
 
-            /*Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
             skillFamily.variants[skillFamily.variants.Length - 1] = new SkillFamily.Variant
             {
-                skillDef = newSkillDef,
+                skillDef = mySkillDef,
                 unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(newSkillDef.skillNameToken, false, null)
-            };*/
+                viewableNode = new ViewablesCatalog.Node(mySkillDef.skillNameToken, false, null)
+            };
         }
 
         void SpecialSetup()
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
 
-            LanguageAPI.Add("VILE_SPECIAL_NAME", "BDRIVE");
-            LanguageAPI.Add("VILE_SPECIAL_DESCRIPTION", "Fire an eletric bomb, dealing <style=cIsDamage>1000% damage</style> and paralize enemies for 5s.");
+            LanguageAPI.Add("VILE_SPECIAL_NAME", "Burning Drive");
+            LanguageAPI.Add("VILE_SPECIAL_DESCRIPTION", "Create a powerful ball of flame using nearby oxygen as fuel, dealing <style=cIsDamage>1000% damage</style>.");
 
             // set up your primary skill def here!
 
@@ -727,7 +761,7 @@ namespace MegamanXVileSurvivor
             mySkillDef.requiredStock = 1;
             mySkillDef.shootDelay = 0;
             mySkillDef.stockToConsume = 1;
-            mySkillDef.icon = Assets.iconCB;
+            mySkillDef.icon = Assets.iconCP;
             mySkillDef.skillDescriptionToken = "VILE_SPECIAL_V_DESCRIPTION";
             mySkillDef.skillName = "VILE_SPECIAL_V_NAME";
             mySkillDef.skillNameToken = "VILE_SPECIAL_V_NAME";
@@ -775,12 +809,16 @@ namespace MegamanXVileSurvivor
         public static Texture charPortrait;
 
         public static GameObject BurningDriveVFX;
+        public static GameObject RedEyeVFX;
 
         public static Sprite iconP;
         public static Sprite iconCB;
         public static Sprite iconBB;
         public static Sprite iconES;
         public static Sprite iconBD;
+        public static Sprite iconSI;
+        public static Sprite iconFR;
+        public static Sprite iconCP;
 
         public static void PopulateAssets()
         {
@@ -794,26 +832,32 @@ namespace MegamanXVileSurvivor
             }
 
             // include this if you're using a custom soundbank
-            /*using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("MegamanXVile.MegamanXVile.bnk"))
+            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("MegamanXVile.VileSB.bnk"))
             {
                 byte[] array = new byte[manifestResourceStream2.Length];
                 manifestResourceStream2.Read(array, 0, array.Length);
                 SoundAPI.SoundBanks.Add(array);
-            }*/
+            }
 
 
 
             // and now we gather the assets
             charPortrait = MainAssetBundle.LoadAsset<Sprite>("Vile_Icon").texture;
 
-            iconP = MainAssetBundle.LoadAsset<Sprite>("PassiveIcon");
+            iconP = MainAssetBundle.LoadAsset<Sprite>("Vile_Icon");
             iconCB = MainAssetBundle.LoadAsset<Sprite>("SkillIconCB");
             iconBB = MainAssetBundle.LoadAsset<Sprite>("SkillIconBB");
             iconES = MainAssetBundle.LoadAsset<Sprite>("SkillIconES");
             iconBD = MainAssetBundle.LoadAsset<Sprite>("SkillIconBD");
+            iconSI = MainAssetBundle.LoadAsset<Sprite>("SkillIconSI");
+            iconFR = MainAssetBundle.LoadAsset<Sprite>("SkillIconFR");
+            iconCP = MainAssetBundle.LoadAsset<Sprite>("SkillIconCP");
 
 
             BurningDriveVFX = Assets.LoadEffect("MagicFireBig", "");
+
+            RedEyeVFX = Assets.LoadEffect("RedEye", "");
+
 
         }
 
@@ -839,14 +883,31 @@ namespace MegamanXVileSurvivor
     }
 }
 
+
+public static class Sounds
+{
+    public static readonly string vileAttack = "Call_Vile_Attack";
+    public static readonly string vilePassive = "Call_Vile_Passive";
+    public static readonly string vileDie = "Call_Vile_Die";
+    public static readonly string vileCherryBlast = "Call_Vile_Cherry_Blast";
+    public static readonly string vileCerberusPhantom = "Call_Vile_Cerberus_Phantom";
+
+}
+
+
+
 namespace EntityStates.ExampleSurvivorStates
 {
     public class PassiveState : GenericCharacterMain
     {
         public float Timer = 5f;
+        public float PassiveTimer = 0f;
         public bool isHeated;
         public float HeatTime = 5f;
         public float baseDuration = 1f;
+        public double MinHP;
+        public static bool isCrit;
+
         private float duration;
         private Animator animator;
         public override void OnEnter()
@@ -858,6 +919,7 @@ namespace EntityStates.ExampleSurvivorStates
         {
             base.OnExit();
         }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -885,7 +947,33 @@ namespace EntityStates.ExampleSurvivorStates
             if (base.inputBank.skill4.justReleased && (Timer <= HeatTime))
                 CherryBlast.buffSkillIndex = 3;
 
+            //-------PASSIVE EFFECT
 
+            PassiveTimer -= Time.fixedDeltaTime;
+
+            MinHP = 0.35 + (base.characterBody.level / 200);
+            if (base.characterBody.healthComponent.combinedHealthFraction < MinHP && PassiveTimer < 5f)
+            {
+                Util.PlaySound(Sounds.vilePassive, base.gameObject);
+                EffectManager.SimpleMuzzleFlash(MegamanXVileSurvivor.Assets.RedEyeVFX, base.gameObject, "EYE", true);
+                //base.healthComponent.AddBarrierAuthority(base.characterBody.healthComponent.fullHealth / 2f);
+                if (NetworkServer.active)
+                {
+                    base.characterBody.AddTimedBuff(BuffIndex.LifeSteal, 6f);
+                    base.characterBody.AddTimedBuff(BuffIndex.FullCrit, 10f);
+                    base.characterBody.AddTimedBuff(BuffIndex.Warbanner, 10f);
+                    base.characterBody.AddTimedBuff(BuffIndex.NoCooldowns, 3f);
+                }
+                PassiveTimer = 50f;
+
+            }
+
+            //------------------------ Check Crit because passive interfer on the primary skill
+
+            if (base.characterBody.HasBuff(BuffIndex.FullCrit))
+                isCrit = true;
+            else
+            isCrit = Util.CheckRoll(base.critStat, base.characterBody.master);
 
             return;
 

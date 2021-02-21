@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2948412430
+CRC: 3147568112
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: db5e22f59019fb63a38e0ee90c1fdc05
+    Hash: f3abf96060798d114ed37282f78e45dd
   TypeTreeHash:
     serializedVersion: 2
     Hash: 03dd90f9ff471b5553f91cd7d4e50849
@@ -62,8 +62,8 @@ ClassTypes:
 Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/GranadeL.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/ExampleSurvivorBody.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconFR.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/TestShoot.anim
-- Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill4Icon.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/Run.dae
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlVile.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/PassiveIcon.png
@@ -72,15 +72,15 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/ExampleSurvivorMesh.mesh
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Vile_Icon.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Materials/matExampleSurvivor.mat
-- Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill2Icon.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/GranadeR.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/LogIn.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/OLDanimExampleSurvivor.controller
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Junk/Model.dae
-- Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill3Icon.png
-- Assets/ExampleSurvivor/ExampleSurvivorAssets/Skill1Icon.png
-- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/ExampleSurvivorGestureMask.mask
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconBD.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconSI.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconCP.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/DebutLoop.anim
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/ExampleSurvivorGestureMask.mask
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MMX Idle Pose.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MaskForAttacksR.mask
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconES.png
@@ -89,6 +89,7 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/IdleeXcella.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/New Animation.anim
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/Vile Mk2 Texture.png
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/RedEye.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/CH010_000_U_Vile@Run To
   Stop.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconBB.png
@@ -97,5 +98,4 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/CH010_000_U_Vile_Mixamo.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlExampleSurvivor.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MaskForAttacksL.mask
-- Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconBD.png
 Dependencies: []

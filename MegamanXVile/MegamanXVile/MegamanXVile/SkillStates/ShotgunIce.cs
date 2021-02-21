@@ -28,7 +28,7 @@ namespace MegamanXVile.SkillStates
             this.animator = base.GetModelAnimator();
             this.muzzleString = "Weapon";
 
-
+            Util.PlaySound(Sounds.vileAttack, base.gameObject);
             base.PlayAnimation("Attack", "TestShot", "attackSpeed", this.duration);
         }
 
@@ -43,14 +43,14 @@ namespace MegamanXVile.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0.15f);
+                base.characterBody.SetSpreadBloom(0.8f);
                 Ray aimRay = base.GetAimRay();
                 //EffectManager.SimpleMuzzleFlash(Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireLaserbolt.impactEffectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireIceOrb.effectPrefab, base.gameObject, this.muzzleString, false);
 
                 if (base.isAuthority)
                 {
-                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.EletricSpark, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
+                    ProjectileManager.instance.FireProjectile(Materials.RegisterProjectiles.ShotgunIceProjectile, aimRay.origin, Util.QuaternionSafeLookRotation(aimRay.direction), base.gameObject, this.damageCoefficient * this.damageStat, 0f, Util.CheckRoll(this.critStat, base.characterBody.master), DamageColorIndex.Default, null, -1f);
                 }
             }
         }

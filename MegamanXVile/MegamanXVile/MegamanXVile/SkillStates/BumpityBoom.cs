@@ -30,7 +30,7 @@ namespace MegamanXVile.SkillStates
             this.animator = base.GetModelAnimator();
             this.muzzleString = "HandR";
 
-
+            Util.PlaySound(Sounds.vileAttack, base.gameObject);
             base.PlayAnimation("AttackR", "GranadeR", "attackSpeed", this.duration);
         }
 

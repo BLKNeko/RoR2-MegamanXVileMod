@@ -12,8 +12,8 @@ namespace MegamanXVile.Materials
         public static GameObject arrowProjectile; // prefab for our survivor's primary attack projectile
         public static GameObject EletricSpark;
         public static GameObject BumpityBombProjectile;
-        public static GameObject TestSkill;
-        public static GameObject TestSkill2;
+        public static GameObject FrontRunnerFireBallProjectile;
+        public static GameObject CerberusPhantonFMJProjectile;
         public static GameObject ShotgunIceProjectile;
 
 
@@ -66,15 +66,15 @@ namespace MegamanXVile.Materials
 
             //CommandoGrenadeProjectile (boa, quica uma vez e explode  depois de um tempo)
             //CryoCanisterBombletsProjectile (boa, ele apenas solta a granada no chão)
-            TestSkill = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/MageFireBombProjectile"), "Prefabs/Projectiles/BombProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
+            FrontRunnerFireBallProjectile = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/MageFireBombProjectile"), "Prefabs/Projectiles/BombProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
 
             // just setting the numbers to 1 as the entitystate will take care of those
-            TestSkill.GetComponent<ProjectileController>().procCoefficient = 1f;
-            TestSkill.GetComponent<ProjectileDamage>().damage = 1f;
-            TestSkill.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            FrontRunnerFireBallProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            FrontRunnerFireBallProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            FrontRunnerFireBallProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
 
             // register it for networking
-            if (TestSkill) PrefabAPI.RegisterNetworkPrefab(TestSkill);
+            if (FrontRunnerFireBallProjectile) PrefabAPI.RegisterNetworkPrefab(FrontRunnerFireBallProjectile);
 
             //--------------------------------------END --------------------------------------------
 
@@ -82,15 +82,15 @@ namespace MegamanXVile.Materials
 
             //CommandoGrenadeProjectile (boa, quica uma vez e explode  depois de um tempo)
             //CryoCanisterBombletsProjectile (boa, ele apenas solta a granada no chão)
-            TestSkill2 = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/FMJ"), "Prefabs/Projectiles/BombProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
+            CerberusPhantonFMJProjectile = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/projectiles/FMJ"), "Prefabs/Projectiles/BombProjectile", true, "C:\\Users\\test\\Documents\\ror2mods\\MegamanXVile\\MegamanXVile\\MegamanXVile\\MegamanXVile.cs", "RegisterCharacter", 155);
 
             // just setting the numbers to 1 as the entitystate will take care of those
-            TestSkill2.GetComponent<ProjectileController>().procCoefficient = 1f;
-            TestSkill2.GetComponent<ProjectileDamage>().damage = 1f;
-            TestSkill2.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            CerberusPhantonFMJProjectile.GetComponent<ProjectileController>().procCoefficient = 1f;
+            CerberusPhantonFMJProjectile.GetComponent<ProjectileDamage>().damage = 1f;
+            CerberusPhantonFMJProjectile.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
 
             // register it for networking
-            if (TestSkill2) PrefabAPI.RegisterNetworkPrefab(TestSkill2);
+            if (CerberusPhantonFMJProjectile) PrefabAPI.RegisterNetworkPrefab(CerberusPhantonFMJProjectile);
 
             //--------------------------------------END --------------------------------------------
 
@@ -116,8 +116,8 @@ namespace MegamanXVile.Materials
                 list.Add(arrowProjectile);
                 list.Add(EletricSpark);
                 list.Add(BumpityBombProjectile);
-                list.Add(TestSkill);
-                list.Add(TestSkill2);
+                list.Add(FrontRunnerFireBallProjectile);
+                list.Add(CerberusPhantonFMJProjectile);
                 list.Add(ShotgunIceProjectile);
             };
         }
