@@ -1,0 +1,11 @@
+{
+    "name": "MegamanXVileMod",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/BLKNeko/RoR2-MegamanXVileMod",
+    "description": "Vile from MegamanX series as a survivor for Risk Of Rain 2",
+    "dependencies": [
+        "tristanmcpherson-R2API-2.5.14",
+        "bbepis-BepInExPack-5.3.1",
+        "kinggrinyov-KingModUtilities-1.4.3"
+    ]
+}
