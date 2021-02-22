@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3147568112
+CRC: 2760530713
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f3abf96060798d114ed37282f78e45dd
+    Hash: 6d29fd7b8380a59c1ba541bded300932
   TypeTreeHash:
     serializedVersion: 2
     Hash: 03dd90f9ff471b5553f91cd7d4e50849
@@ -83,6 +83,7 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/ExampleSurvivorGestureMask.mask
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MMX Idle Pose.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MaskForAttacksR.mask
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlVileMKII.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconES.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/ch_010_000_Vile.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Textures/texExampleSurvivor.png
@@ -95,6 +96,7 @@ Assets:
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/SkillIconBB.png
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/MagicFireBig.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/Run to Stop.anim
+- Assets/ExampleSurvivor/ExampleSurvivorAssets/Materials/matVileMKII.mat
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/CH010_000_U_Vile_Mixamo.fbx
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/mdlExampleSurvivor.prefab
 - Assets/ExampleSurvivor/ExampleSurvivorAssets/Animations/MaskForAttacksL.mask

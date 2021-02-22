@@ -49,7 +49,7 @@ namespace MegamanXVile.SkillStates
 
                 base.characterBody.SetSpreadBloom(0.8f);
                 Ray aimRay = base.GetAimRay();
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol.effectPrefab, base.gameObject, this.muzzleString, false);
+                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FireShotgun.effectPrefab, base.gameObject, this.muzzleString, false);
                 float spread_value = ((aimRay.direction.x) - (aimRay.direction.x * 3f));
                 //EffectManager.SimpleMuzzleFlash(EntityStates.Mage.Weapon.FireLaserbolt.impactEffectPrefab, base.gameObject, this.muzzleString, false);
                 Vector3 raygun1 = new Vector3(aimRay.direction.x + 0.2f,aimRay.direction.y,aimRay.direction.z);

@@ -17,6 +17,7 @@ using MegamanXVile.SkillStates;
 using MegamanXVile.Materials;
 using EntityStates.ExampleSurvivorStates;
 using System.IO;
+using BepInEx.Configuration;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -45,8 +46,21 @@ namespace MegamanXVileSurvivor
 
         private static readonly Color characterColor = new Color(0.35f, 0.05f, 0.4f); // color used for the survivor
 
+        public static ConfigEntry<int> skinConfig { get; set; }
+
         private void Awake()
         {
+            //------------------------START CONFIG--------------------------
+            skinConfig = Config.Bind<int>(
+            "SKIN_SELECTOR",
+            "SkinIndex",
+            0,
+            "Vile Default Skin = 0 // Vile MK-II Skin = 1"
+            );
+
+
+            //------------------------END CONFIG----------------------------
+
             Assets.PopulateAssets(); // first we load the assets from our assetbundle
             CreatePrefab(); // then we create our character's body prefab
 
@@ -64,8 +78,25 @@ namespace MegamanXVileSurvivor
             Destroy(main.transform.Find("CameraPivot").gameObject);
             Destroy(main.transform.Find("AimOrigin").gameObject);
 
+            int skinIndex = skinConfig.Value;
+
+            GameObject model;
+
+            switch (skinIndex)
+            {
+                case 0:
+                    model = Assets.MainAssetBundle.LoadAsset<GameObject>("mdlVile");
+                    break;
+                case 1:
+                    model = Assets.MainAssetBundle.LoadAsset<GameObject>("mdlVileMKII");
+                    break;
+                default:
+                    model = Assets.MainAssetBundle.LoadAsset<GameObject>("mdlVile");
+                    break;
+            }
+
             // make sure it's set up right in the unity project
-            GameObject model = Assets.MainAssetBundle.LoadAsset<GameObject>("mdlVile");
+            //GameObject model = Assets.MainAssetBundle.LoadAsset<GameObject>("mdlVile");
 
             return model;
         }
@@ -372,11 +403,11 @@ namespace MegamanXVileSurvivor
             characterDisplay.AddComponent<NetworkIdentity>();
 
             // write a clean survivor description here!
-            string desc = "Example Survivor something something.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Sample text 1." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Sample text 2." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Sample Text 3." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Sample Text 4.</color>" + Environment.NewLine + Environment.NewLine;
+            string desc = "Vile, the EX-Maverick Hunter.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Vile Cherry Blast have a low start so use it after any skill for a momentary buff and faster start" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Vile is slow but powerfull, try use his skills to get out of trouble" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > When activated, Vile Passive give him life steal buff for 6 seconds so try to cause the maximum damage possible" + Environment.NewLine + Environment.NewLine;
+            //desc = desc + "< ! > Sample Text 4.</color>" + Environment.NewLine + Environment.NewLine;
 
             // add the language tokens
             LanguageAPI.Add("VILE_NAME", "Vile");
@@ -441,7 +472,7 @@ namespace MegamanXVileSurvivor
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
 
             LanguageAPI.Add("VILE_PASSIVE_NAME", "Passive");
-            LanguageAPI.Add("VILE_PASSIVE_DESCRIPTION", "<style=cIsUtility>Doot</style> <style=cIsHealing>doot</style>.");
+            LanguageAPI.Add("VILE_PASSIVE_DESCRIPTION", "<style=cIsUtility>Vile won't give up that easily from a fight, moved by his anger he get stronger in a critical state.</style> <style=cIsHealing>When low health vile gain 10 seconds of buffs</style>.");
 
             component.passiveSkill.enabled = true;
             component.passiveSkill.skillNameToken = "VILE_PASSIVE_NAME";

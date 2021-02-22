@@ -58,7 +58,7 @@ namespace MegamanXVile.SkillStates
 
             //if (this.swingIndex == 0) base.PlayAnimation("Gesture, Override", "ZSlash1", "FireArrow.playbackRate", this.duration);
             //else base.PlayAnimation("Gesture, Override", "ZSlash1", "FireArrow.playbackRate", this.duration);
-            //base.PlayAnimation("Attack", "ZSlash1New", "attackSpeed", this.duration);
+            base.PlayAnimation("Attack", "BurningDrive", "attackSpeed", this.duration);
 
             EffectManager.SimpleMuzzleFlash(MegamanXVileSurvivor.Assets.BurningDriveVFX, base.gameObject, "GroundBox", true);
             EffectManager.SimpleMuzzleFlash(MegamanXVileSurvivor.Assets.BurningDriveVFX, base.gameObject, "GroundBox", true);
