@@ -140,7 +140,8 @@ namespace MegamanXVile.SkillStates
 
                     }
 
-                    if(shootsfx)
+                    // if(shootsfx)
+                    // Util.PlaySound(Sounds.vileCherryBlast, base.gameObject);
                     Util.PlaySound(Sounds.vileCherryBlast, base.gameObject);
 
 

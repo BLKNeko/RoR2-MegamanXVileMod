@@ -20,5 +20,5 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	952911562	Vile_Haa	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_Haa_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Attack\Vile_Haa		3232
 	1058223266	Vile_CerberusPhantom	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_CerberusPhantom_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_CerberusPhantom		3429
 	1058733777	Vile_Here	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_Here_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Attack\Vile_Here		3229
-	1068992085	Vile_Cherry_Blast	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_Cherry_Blast_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Cherry_Blast		2905
+	1068992085	Vile_Cherry_Blast	C:\Users\augus\OneDrive\Documentos\WwiseProjects\MegamanXVileSB\.cache\Windows\SFX\Vile_Cherry_Blast_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\MasterMixer\SFXMaster\SFX\Vile_Cherry_Blast_SFX\Vile_Cherry_Blast		2905
 
