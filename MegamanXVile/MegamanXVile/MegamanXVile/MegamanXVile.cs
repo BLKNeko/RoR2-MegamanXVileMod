@@ -404,9 +404,9 @@ namespace MegamanXVileSurvivor
 
             // write a clean survivor description here!
             string desc = "Vile, the EX-Maverick Hunter.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Vile Cherry Blast have a low start so use it after any skill for a momentary buff and faster start" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Vile is slow but powerfull, try use his skills to get out of trouble" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > When activated, Vile Passive give him life steal buff for 6 seconds so try to cause the maximum damage possible" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Vile's Cherry Blast has a low start so use it after any skill for a momentary buff and faster start" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Vile is slow but powerful, try to use his skills to get out of trouble" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > When activated, Vile's Passive give him a life steal buff for 6 seconds, so try to cause the maximum damage possible" + Environment.NewLine + Environment.NewLine;
             //desc = desc + "< ! > Sample Text 4.</color>" + Environment.NewLine + Environment.NewLine;
 
             // add the language tokens
@@ -472,7 +472,7 @@ namespace MegamanXVileSurvivor
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
 
             LanguageAPI.Add("VILE_PASSIVE_NAME", "Passive");
-            LanguageAPI.Add("VILE_PASSIVE_DESCRIPTION", "<style=cIsUtility>Vile won't give up that easily from a fight, moved by his anger he get stronger in a critical state.</style> <style=cIsHealing>When low health vile gain 10 seconds of buffs</style>.");
+            LanguageAPI.Add("VILE_PASSIVE_DESCRIPTION", "<style=cIsUtility>Vile won't give up that easily from a fight, moved by his anger he get stronger in a critical state.</style> <style=cIsHealing>When in low health vile gain 10 seconds of buffs</style>.");
 
             component.passiveSkill.enabled = true;
             component.passiveSkill.skillNameToken = "VILE_PASSIVE_NAME";
