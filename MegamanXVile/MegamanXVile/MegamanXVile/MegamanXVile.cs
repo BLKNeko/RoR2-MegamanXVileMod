@@ -932,6 +932,8 @@ namespace EntityStates.ExampleSurvivorStates
     public class PassiveState : GenericCharacterMain
     {
         public float Timer = 5f;
+        public float ChillTime;
+        public float ChillDelay = 1.5f;
         public float PassiveTimer = 0f;
         public bool isHeated;
         public float HeatTime = 5f;
@@ -950,6 +952,32 @@ namespace EntityStates.ExampleSurvivorStates
         {
             base.OnExit();
         }
+
+        
+        public override void Update()
+        {
+            base.Update();
+
+            ChillTime += Time.deltaTime;
+
+            if (base.inputBank.skill1.justReleased)
+                ChillDelay = 0.1f;
+
+
+            if(ChillTime >= 2f)
+            {
+                if (ChillDelay >= 1.5f - (base.attackSpeedStat / 10))
+                    ChillDelay = 1.5f - (base.attackSpeedStat / 10);
+                else
+                    ChillDelay += 0.25f;
+
+                ChillTime = 0f;
+            }
+
+            CherryBlast.Chilldelay = ChillDelay;
+
+        }
+        
 
         public override void FixedUpdate()
         {

@@ -24,6 +24,7 @@ namespace MegamanXVile.SkillStates
         public static bool heat;
         public static int buffSkillIndex;
 
+        public static float Chilldelay;
         public float shootdelay = 1.5f;
         public float timer = 2f;
 
@@ -48,9 +49,12 @@ namespace MegamanXVile.SkillStates
 
 
             if (heat)
-                shootdelay = 0.86f;
+                shootdelay = (Chilldelay - 0.3f);
             else
-                shootdelay -= (base.attackSpeedStat / 10);
+                shootdelay = Chilldelay;
+
+
+            //shootdelay -= (base.attackSpeedStat / 10);
 
         }
 
